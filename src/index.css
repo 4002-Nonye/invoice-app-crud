@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  font-family: "League Spartan", sans-serif;
+  background-color: #f8f8fb;
+  transition: 500ms;
+  scroll-behavior: smooth;
+ 
+  
+
+}
+
+.status {
+  @apply w-32 rounded-md px-5 py-2 text-center font-bold capitalize before:mr-1 before:mt-[-0.2rem] before:inline-block before:h-[0.4rem] before:w-[0.4rem] before:rounded-lg before:font-extrabold before:content-[''];
+}
+.pending-status {
+  @apply bg-orange bg-opacity-10 text-orange before:bg-orange;
+}
+.draft-status {
+  @apply bg-darkblue-600 bg-opacity-10 text-darkblue-600 before:bg-darkblue-600;
+}
+.paid-status {
+  @apply bg-green bg-opacity-10 text-green before:bg-green;
+}
+::-webkit-scrollbar {
+  @apply hidden;
+}
+
+.list{
+  @apply w-16 text-left overflow-scroll
+}
+.label{
+  @apply text-grey-100
+}
