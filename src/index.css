@@ -8,17 +8,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "League Spartan", sans-serif;
 }
 
 body {
   position: relative;
-  font-family: "League Spartan", sans-serif;
+
   background-color: #f8f8fb;
   transition: 500ms;
   scroll-behavior: smooth;
- 
-  
-
 }
 
 .status {
@@ -37,9 +35,68 @@ body {
   @apply hidden;
 }
 
-.list{
-  @apply w-16 text-left overflow-scroll
+.list {
+  @apply w-16 overflow-scroll text-left;
 }
-.label{
-  @apply text-grey-100
+.label {
+  @apply font-bold text-grey-100;
+}
+.input {
+  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-65 p-3 transition-all duration-300 focus:outline-none focus:ring focus:ring-lightblue-300;
+}
+
+.react-datepicker__input-container input {
+  @apply cursor-pointer border-none bg-darkblue-100 focus:outline-none;
+}
+.react-datepicker-popper {
+  @apply bg-white-100;
+
+}
+.react-datepicker-popper[style]{
+  transform: translate(140.5px, 1044px) !important;
+}
+.react-datepicker__header {
+  @apply border-b-0 bg-white-100 p-4 pt-6;
+}
+.react-datepicker__navigation-icon::before {
+  @apply border-lightblue-300;
+}
+.react-datepicker.wrapper {
+  border: none;
+  box-shadow: 0 1rem 2rem 0 rgba(72, 84, 159, 0.25);
+  width: 100%;
+}
+.react-datepicker__month-container{
+@apply float-none
+}
+.react-datepicker__day--keyboard-selected{
+  @apply bg-lightblue-100
+}
+.react-datepicker__navigation {
+  @apply p-4 pt-6;
+}
+.react-datepicker__day-name,
+.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle,
+.react-datepicker-popper[data-placement^="bottom"]
+  .react-datepicker__triangle::after,
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle {
+  @apply hidden;
+}
+
+.react-datepicker__day--selected {
+  @apply bg-white-100 text-lightblue-300;
+}
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--in-selecting-range:hover,
+.react-datepicker__day--in-range:hover,
+.react-datepicker__month-text--selected:hover,
+.react-datepicker__month-text--in-selecting-range:hover,
+.react-datepicker__month-text--in-range:hover,
+.react-datepicker__quarter-text--selected:hover,
+.react-datepicker__quarter-text--in-selecting-range:hover,
+.react-datepicker__quarter-text--in-range:hover,
+.react-datepicker__year-text--selected:hover,
+.react-datepicker__year-text--in-selecting-range:hover,
+.react-datepicker__year-text--in-range:hover {
+  @apply bg-transparent;
 }
