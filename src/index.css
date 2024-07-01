@@ -46,7 +46,7 @@ body {
 }
 
 .react-datepicker__input-container input {
-  @apply cursor-pointer border-none bg-darkblue-100 focus:outline-none;
+  @apply cursor-pointer border-none bg-darkblue-100 focus:outline-none w-full;
 }
 .react-datepicker-popper {
   @apply bg-white-100;
