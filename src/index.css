@@ -39,14 +39,14 @@ body {
   @apply w-16 overflow-scroll text-left;
 }
 .label {
-  @apply font-bold text-grey-100;
+  @apply font-semibold text-grey-500;
 }
 .input {
-  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-65 p-3 transition-all duration-300 focus:outline-none focus:ring focus:ring-lightblue-300;
+  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 transition-all duration-300 focus:outline-none focus:ring focus:ring-lightblue-300;
 }
 
 .react-datepicker__input-container input {
-  @apply cursor-pointer border-none bg-darkblue-100 focus:outline-none w-full;
+  @apply cursor-pointer border-none bg-darkblue-100 focus:outline-none w-full bg-opacity-5;
 }
 .react-datepicker-popper {
   @apply bg-white-100;

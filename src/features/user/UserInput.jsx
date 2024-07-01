@@ -12,7 +12,7 @@ function UserForm() {
         value="19 Union Terrace"
         className="input"
       />
-      <div className="flex gap-5 pt-5 items-center">
+      <div className="flex gap-5 pt-5 items-center flex-wrap">
         <div className="flex space-y-3 flex-col">
           <label htmlFor="user-city" className="label">
             City
@@ -22,7 +22,7 @@ function UserForm() {
             name="user-city"
             id="user-city"
             value="19 Union Terrace"
-            className="input"
+            className="input w-full "
           />
         </div>
 
@@ -35,7 +35,7 @@ function UserForm() {
             name="user-postcode"
             id="user-postcode"
             value="E1 3EZ"
-            className="input"
+            className="input w-full"
           />
         </div>
 
@@ -48,7 +48,7 @@ function UserForm() {
             name="user-country"
             id="user-country"
             value="United Kingdom"
-            className="input"
+            className="input  w-full"
           />
         </div>
       </div>

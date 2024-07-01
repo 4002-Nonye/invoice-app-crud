@@ -6,15 +6,15 @@ import { useState } from "react";
 function Calendar() {
   const [startDate, setStartDate] = useState(new Date());
   return (
-    <div>
+    <div className="w-full">
       <h3 className="label">Calendar</h3>
-      <div className="inline-flex w-72 justify-between rounded-sm cursor-pointer border-darkblue-100 bg-darkblue-100 p-3 text-lg font-bold text-darkblue-600">
+      <div className="inline-flex w-full  justify-between rounded-sm cursor-pointer border-darkblue-100 bg-darkblue-100 p-3 text-lg font-bold text-darkblue-600 input">
       <DatePicker
 
      dateFormat="dd MMM yyyy"
      dateFormatCalendar="MMM yyyy"
         closeOnScroll={true}
-        calendarClassName='dateInput wrapper'
+        calendarClassName='dateInput wrapper '
         selected={startDate}
         onChange={(date) => setStartDate(date)}
       />
