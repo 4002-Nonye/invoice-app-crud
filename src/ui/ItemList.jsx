@@ -36,7 +36,7 @@ function ItemList() {
   return (
     <div className="relative pt-5">
       <h3 className="text-xl font-bold text-grey-100">Item List</h3>
-      <div className="mb-4 md:flex w-full hidden justify-between">
+      <div className="mb-4 md:flex w-full hidden justify-between md:px-4 md:pt-3">
         <p className="label">Item Name</p>
         <div className="inline-flex  gap-6">
           <p className="label w-16">Qty.</p>
@@ -44,7 +44,7 @@ function ItemList() {
           <p className="label w-20">Total</p>
         </div>
       </div>
-      <div className="w-full overflow-y-auto h-48 md:h-24 pt-4">
+      <div className="w-full overflow-y-auto h-48 md:h-24 px-4">
         {itemArray.map((item) => (
           <Items key={item.id} item={item} />
         ))}
