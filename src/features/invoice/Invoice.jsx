@@ -69,14 +69,14 @@ function Invoice() {
     if (status === "") return invoice;
     return invoice.status === status;
   });
-  console.log(filteredInvoice);
+
   return (
     <div className="mt-20 flex w-full flex-col px-4 md:w-[unset] md:px-0 lg:mt-0">
       {" "}
-      <div className="flex w-full items-start justify-between md:w-[42rem] lg:w-[45rem]">
+      <div className="flex dark:text-white-100 w-full items-start justify-between md:w-[42rem] lg:w-[45rem]">
         <div>
           <h1 className="text-3xl font-bold capitalize">invoices</h1>
-          <p className="text-grey-200">
+          <p className="text-grey-200 dark:text-white-100 ">
             There {filteredInvoice.length > 1 ? "are" : "is"}{" "}
             {filteredInvoice.length} {status === "" ? "total" : status}{" "}
             {filteredInvoice.length > 1 ? "invoices" : "invoice"}

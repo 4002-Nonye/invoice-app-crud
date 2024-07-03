@@ -11,13 +11,13 @@ function InvoiceDetail() {
         className="mb-7 inline-flex items-center justify-start gap-3"
       >
         <img src={arrowLeft} alt="back icon" />
-        <span className="font-bold transition duration-500 ease-linear hover:text-grey-200">
+        <span className="font-bold transition duration-500 ease-linear hover:text-grey-200 dark:text-white-200">
           {" "}
           Go back
         </span>
       </Button>
 
-      <div className="flex justify-between rounded-md bg-white-100 p-5 shadow-md">
+      <div className="flex justify-between rounded-md dark:bg-darkblue-400  bg-white-100 p-5 shadow-md">
         <div className="inline-flex w-full items-center justify-between gap-7 md:w-[unset]">
           <p className="font-semibold capitalize text-grey-500">status</p>
           <p className="status pending-status">Pending</p>
@@ -32,7 +32,7 @@ function InvoiceDetail() {
 
       <InvoiceSummary />
 
-      <DeletePrompt />
+      {/* <DeletePrompt /> */}
     </div>
   );
 }

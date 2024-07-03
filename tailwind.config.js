@@ -4,6 +4,9 @@ export default {
   darkMode: "selector",
   theme: {
     extend: {
+      screens: {
+        xm: "400px",
+      },
       colors: {
         grey: {
           100: "#777f98",
