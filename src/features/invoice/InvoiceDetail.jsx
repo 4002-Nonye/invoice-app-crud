@@ -32,7 +32,7 @@ function InvoiceDetail() {
 
       <InvoiceSummary />
 
-      {/* <DeletePrompt /> */}
+      <DeletePrompt />
     </div>
   );
 }
