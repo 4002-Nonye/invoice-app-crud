@@ -42,24 +42,24 @@ body.dark{
   @apply w-16 overflow-scroll text-left;
 }
 .label {
-  @apply font-semibold text-grey-500;
+  @apply font-semibold text-grey-500 dark:text-grey-200 ;
 }
 .input {
-  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 transition-all duration-300 focus:outline-none focus:ring focus:ring-lightblue-300;
+  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 transition-all duration-300 focus:outline-none focus:ring focus:ring-lightblue-300 dark:bg-darkblue-400 dark:text-white-100 dark:border-darkblue-400;
 }
 
 .react-datepicker__input-container input {
-  @apply cursor-pointer border-none bg-darkblue-100 focus:outline-none w-full bg-opacity-5;
+  @apply cursor-pointer border-none bg-darkblue-100 dark:bg-darkblue-400 focus:outline-none w-full bg-opacity-5;
 }
 .react-datepicker-popper {
-  @apply bg-white-100;
+  @apply bg-white-100 ;
 
 }
 .react-datepicker-popper[style]{
   transform: translate(140.5px, 1044px) !important;
 }
 .react-datepicker__header {
-  @apply border-b-0 bg-white-100 p-4 pt-6;
+  @apply border-b-0 bg-white-100 p-4 pt-6 ;
 }
 .react-datepicker__navigation-icon::before {
   @apply border-lightblue-300;

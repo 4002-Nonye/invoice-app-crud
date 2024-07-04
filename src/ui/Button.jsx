@@ -9,9 +9,9 @@ function Button({ children, type, className }) {
     delete: `${baseButtonStyle} text-white-100 bg-red-200 hover:bg-red-100 `,
     paid: `${baseButtonStyle} text-white-100 bg-lightblue-300 hover:bg-lightblue-200`,
     
-    discard: `${baseButtonStyle}  bg-darkblue-100 bg-opacity-35 hover:bg-opacity-100 `,
-    add:`${baseButtonStyle} bg-darkblue-100 bg-opacity-35 hover:bg-opacity-100 text-lightblue-100 text-lg  w-full mt-7 `,
-    draft: `${baseButtonStyle} bg-darkblue-300 hover:bg-darkblue-500 text-grey-100 `,
+    discard: `${baseButtonStyle}  bg-darkblue-100 bg-opacity-35 hover:bg-opacity-100 dark:bg-darkblue-400 dark:text-white-200 `,
+    add:`${baseButtonStyle} bg-darkblue-100 bg-opacity-35 hover:bg-opacity-100 text-lightblue-100 text-lg  w-full mt-7 dark:bg-darkblue-400 dark:text-white-200`,
+    draft: `${baseButtonStyle} bg-darkblue-300 hover:bg-darkblue-500 text-grey-100  dark:bg-darkblue-200 dark:text-white-200`,
     submit: `${baseButtonStyle}  text-white-100 bg-lightblue-300 hover:bg-lightblue-200 `
   };
 

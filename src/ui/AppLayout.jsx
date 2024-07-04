@@ -20,10 +20,10 @@ function AppLayout() {
   return (
     <>
       <form
-        className="fixed z-40 flex h-full flex-col space-y-4 overflow-scroll rounded-lg bg-white-200 px-5 pb-16 pt-32 shadow-lg lg:pl-36 lg:pr-10 lg:pt-16 xl:w-[54.5%]"
+        className="fixed z-40 flex h-full flex-col space-y-4 overflow-scroll rounded-lg dark:bg-darkblue-500 bg-white-200 px-5 pb-16 pt-32 shadow-lg lg:pl-36 lg:pr-10 lg:pt-16 xl:w-[54.5%]"
         action=""
       >
-        <h3 className="text-3xl font-bold">New invoice</h3>
+        <h3 className="text-3xl font-bold dark:text-white-200">New invoice</h3>
         <UserInput />
         <ClientInput />
         <div className="flex w-full gap-10 pt-5">
