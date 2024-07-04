@@ -13,7 +13,7 @@ function UserForm() {
         className="input"
       />
       <div className="flex gap-5 pt-5 items-center flex-wrap">
-        <div className="flex space-y-3 flex-col">
+        <div className="flex space-y-3 flex-col w-full md:w-[unset]">
           <label htmlFor="user-city" className="label">
             City
           </label>
@@ -26,7 +26,7 @@ function UserForm() {
           />
         </div>
 
-        <div className="flex space-y-3 flex-col">
+        <div className="flex space-y-3 flex-col w-full md:w-[unset]">
           <label htmlFor="user-postcode" className="label">
             Post Code
           </label>
@@ -39,7 +39,7 @@ function UserForm() {
           />
         </div>
 
-        <div className="flex space-y-3 flex-col">
+        <div className="flex space-y-3 flex-col w-full md:w-[unset]">
           <label htmlFor="user-country" className="label">
             Country
           </label>

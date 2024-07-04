@@ -18,8 +18,8 @@ body {
   transition: 500ms;
   scroll-behavior: smooth;
 }
-body.dark{
-  @apply bg-darkblue-500
+body.dark {
+  @apply bg-darkblue-500;
 }
 
 .status {
@@ -29,7 +29,7 @@ body.dark{
   @apply bg-orange bg-opacity-10 text-orange before:bg-orange;
 }
 .draft-status {
-  @apply bg-darkblue-600 bg-opacity-10 text-darkblue-600 before:bg-darkblue-600 dark:text-white-200 dark:bg-darkblue-200 dark:before:bg-white-200;
+  @apply bg-darkblue-600 bg-opacity-10 text-darkblue-600 before:bg-darkblue-600 dark:bg-darkblue-200 dark:text-white-200 dark:before:bg-white-200;
 }
 .paid-status {
   @apply bg-green bg-opacity-10 text-green before:bg-green;
@@ -42,38 +42,39 @@ body.dark{
   @apply w-16 overflow-scroll text-left;
 }
 .label {
-  @apply font-semibold text-grey-500 dark:text-grey-200 ;
+  @apply font-semibold text-grey-500 dark:text-grey-200;
 }
 .input {
-  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 transition-all duration-300 focus:outline-none focus:ring focus:ring-lightblue-300 dark:bg-darkblue-400 dark:text-white-100 dark:border-darkblue-400;
+  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 caret-lightblue-300 transition-all duration-300 focus:outline-none focus:ring focus:ring-lightblue-300 dark:border-darkblue-400 dark:bg-darkblue-400 dark:text-white-100;
 }
 
 .react-datepicker__input-container input {
-  @apply cursor-pointer border-none bg-darkblue-100 dark:bg-darkblue-400 focus:outline-none w-full bg-opacity-5;
+  @apply  w-full cursor-pointer border-none bg-darkblue-100 bg-opacity-5 focus:outline-none dark:bg-darkblue-400 outline-none;
 }
 .react-datepicker-popper {
-  @apply bg-white-100 ;
-
+  @apply bg-white-100 dark:bg-darkblue-300;
 }
-.react-datepicker-popper[style]{
+.react-datepicker-popper[style] {
   transform: translate(140.5px, 1044px) !important;
 }
 .react-datepicker__header {
-  @apply border-b-0 bg-white-100 p-4 pt-6 ;
+  @apply border-b-0 bg-white-100 p-4 pt-6 dark:bg-darkblue-300;
 }
 .react-datepicker__navigation-icon::before {
   @apply border-lightblue-300;
 }
 .react-datepicker.wrapper {
-  border: none;
-  box-shadow: 0 1rem 2rem 0 rgba(72, 84, 159, 0.25);
-  width: 100%;
+  @apply shadow-3xl w-full border-0 outline-none dark:bg-darkblue-300 dark:shadow-none;
 }
-.react-datepicker__month-container{
-@apply float-none
+.react-datepicker__month-container {
+  @apply float-none;
 }
-.react-datepicker__day--keyboard-selected{
-  @apply bg-lightblue-100
+.react-datepicker__day,
+.react-datepicker__current-month {
+  @apply dark:text-white-100;
+}
+.react-datepicker__day--keyboard-selected {
+  @apply bg-lightblue-100 dark:bg-darkblue-400;
 }
 .react-datepicker__navigation {
   @apply p-4 pt-6;
@@ -87,7 +88,7 @@ body.dark{
 }
 
 .react-datepicker__day--selected {
-  @apply bg-white-100 text-lightblue-300;
+  @apply bg-transparent text-lightblue-300;
 }
 .react-datepicker__day--selected:hover,
 .react-datepicker__day--in-selecting-range:hover,
@@ -100,6 +101,10 @@ body.dark{
 .react-datepicker__quarter-text--in-range:hover,
 .react-datepicker__year-text--selected:hover,
 .react-datepicker__year-text--in-selecting-range:hover,
-.react-datepicker__year-text--in-range:hover {
+.react-datepicker__year-text--in-range:hover,
+.react-datepicker__day:hover {
   @apply bg-transparent;
+}
+.react-datepicker__day--outside-month {
+  @apply text-grey-300;
 }

@@ -38,3 +38,6 @@ function InvoiceDetail() {
 }
 
 export default InvoiceDetail;
+
+
+// handle hover states for dark mode element

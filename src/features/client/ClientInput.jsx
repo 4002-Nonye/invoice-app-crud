@@ -33,7 +33,7 @@ function ClientInput() {
         className="input"
       />{" "}
       <div className="flex items-center gap-5 flex-wrap pt-5">
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 w-full md:w-[unset]">
           <label htmlFor="client-city" className="label">
             City
           </label>
@@ -46,7 +46,7 @@ function ClientInput() {
           />
         </div>
 
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 w-full md:w-[unset]">
           <label htmlFor="client-postcode" className="label">
             Post Code
           </label>
@@ -59,7 +59,7 @@ function ClientInput() {
           />
         </div>
 
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 w-full md:w-[unset]">
           <label htmlFor="client-country" className="label">
             Country
           </label>

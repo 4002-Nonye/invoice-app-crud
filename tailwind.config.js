@@ -7,6 +7,9 @@ export default {
       screens: {
         xm: "400px",
       },
+      boxShadow: {
+        '3xl': '0 1rem 2rem 0 rgba(72, 84, 159, 0.25)',
+      },
       colors: {
         grey: {
           100: "#777f98",

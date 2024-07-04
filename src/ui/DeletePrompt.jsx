@@ -10,7 +10,7 @@ function DeletePrompt() {
       </p>
 
       <div className="ml-auto flex gap-5 ">
-        <Button type="discard">Cancel</Button>
+        <Button type="cancel">Cancel</Button>
         <Button type="delete">Delete</Button>
       </div>
     </div>
