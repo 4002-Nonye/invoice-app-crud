@@ -9,13 +9,14 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "League Spartan", sans-serif;
+  transition: 1000ms;
 }
 
 body {
   position: relative;
 
   background-color: #f8f8fb;
-  transition: 500ms;
+  
   scroll-behavior: smooth;
 }
 body.dark {
