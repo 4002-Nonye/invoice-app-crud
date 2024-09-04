@@ -1,10 +1,10 @@
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 import calendar from "../assets/calendar.svg";
-import { useState } from "react";
 
-function Calendar() {
-  const [startDate, setStartDate] = useState(new Date());
+
+function Calendar({startDate,setStartDate}) {
+  // const [startDate, setStartDate] = useState(new Date());
   return (
     <div className="w-full">
       <h3 className="label ">Calendar</h3>
@@ -16,6 +16,7 @@ function Calendar() {
           calendarClassName="dateInput wrapper "
           selected={startDate}
           onChange={(date) => setStartDate(date)}
+         
         />
         <img src={calendar} alt="icon" />
       </div>

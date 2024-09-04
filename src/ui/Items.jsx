@@ -5,7 +5,9 @@ function Items({ item }) {
       <input
         className="input md:my-2 my-5 w-full text-darkblue-600 md:w-[19rem]"
         type="text"
-        value="graphic design"
+        // value="graphic design"
+
+        
       />
 
       <div className="mb-7 inline-flex items-center gap-6 md:mb-0">
@@ -14,7 +16,7 @@ function Items({ item }) {
           <input
             className="input w-16 text-darkblue-600"
             type="text"
-            value={0}
+            // value={0}
           />
         </div>
 
@@ -23,7 +25,7 @@ function Items({ item }) {
           <input
             className="input w-24 text-darkblue-600"
             type="text"
-            value={10}
+            // value={10}
           />
         </div>
         <div className="flex flex-col">

@@ -1,59 +1,66 @@
-function UserForm() {
+/* eslint-disable react/prop-types */
+import Box from "../../ui/Box";
+import Label from "../../ui/Label";
+
+function UserInput({ register, errors }) {
   return (
     <>
       <h4 className="font-bold text-lightblue-300">Bill From</h4>
-      <label htmlFor="user-address" className="label">
-        Street Address
-      </label>
+
+      <Label
+        label="Street Address"
+        error={errors?.userAddress?.message}
+        htmlFor="userAddress"
+      />
       <input
         type="text"
-        name="user-address"
-        id="user-address"
-        value="19 Union Terrace"
-        className="input"
+        name="userAddress"
+        id="userAddress"
+        className={`input ${errors?.userAddress && "errorBorder"}`}
+        {...register("userAddress", {
+          required: "can't be empty!",
+        })}
       />
-      <div className="flex gap-5 pt-5 items-center flex-wrap">
-        <div className="flex space-y-3 flex-col w-full md:w-[unset]">
-          <label htmlFor="user-city" className="label">
-            City
-          </label>
-          <input
-            type="text"
-            name="user-city"
-            id="user-city"
-            value="19 Union Terrace"
-            className="input w-full "
-          />
-        </div>
 
-        <div className="flex space-y-3 flex-col w-full md:w-[unset]">
-          <label htmlFor="user-postcode" className="label">
-            Post Code
-          </label>
+      <div className="gridDisplay pt-5">
+        <Box label="City" error={errors?.userCity?.message}>
           <input
             type="text"
-            name="user-postcode"
-            id="user-postcode"
-            value="E1 3EZ"
-            className="input w-full"
+            name="userCity"
+            id="userCity"
+            className={`input ${errors?.userCity && "errorBorder"}`}
+            {...register("userCity", {
+              required: "can't be empty!",
+            })}
           />
-        </div>
+        </Box>
 
-        <div className="flex space-y-3 flex-col w-full md:w-[unset]">
-          <label htmlFor="user-country" className="label">
-            Country
-          </label>
+        <Box label="Post code" error={errors?.userPostcode?.message}>
           <input
             type="text"
-            name="user-country"
-            id="user-country"
-            value="United Kingdom"
-            className="input  w-full"
+            name="userPostcode"
+            id="userPostcode"
+            className={`input ${errors?.userPostcode && "errorBorder"}`}
+            {...register("userPostcode", {
+              required: "can't be empty!",
+            })}
           />
-        </div>
+        </Box>
+
+        <Box label="Country" error={errors?.userCountry?.message}>
+          <input
+            type="text"
+            name="userCountry"
+            id="userCountry"
+            className={`input ${errors?.userCountry && "errorBorder"}`}
+            {...register("userCountry", {
+              required: "can't be empty!",
+            })}
+          />
+        </Box>
       </div>
     </>
   );
 }
 
-export default UserForm;
+export default UserInput;

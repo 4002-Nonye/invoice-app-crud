@@ -1,76 +1,97 @@
-function ClientInput() {
+import Box from "../../ui/Box";
+import Label from "../../ui/Label";
+
+/* eslint-disable react/prop-types */
+function ClientInput({ register, errors }) {
+  
   return (
     <>
       <h4 className="pt-7 font-bold text-lightblue-300">Bill To</h4>
-      <label htmlFor="client-name" className="label">
-        Client&apos;s Name
-      </label>
-      <input
-        type="text"
-        name="client-name"
-        id="client-name"
-        value="Adanma"
-        className="input"
+      {/* CLIENT'S NAME  */}
+      <Label
+        label="Client's Name"
+        error={errors?.clientName?.message}
+        htmlFor="clientName"
       />
-      <label htmlFor="client-email" className="label pt-4">
-        Client&apos;s Email
-      </label>
       <input
         type="text"
-        name="client-email"
-        id="client-email"
-        value="eg: example@gmail.com"
-        className="input"
+        name="clientName"
+        id="clientName"
+        className={`input ${errors?.clientName && "errorBorder"}`}
+        {...register("clientName", {
+          required: "can't be empty!",
+        })}
       />
-      <label htmlFor="client-address" className="label pt-4">
-        Client&apos;s Address
-      </label>
+
+      {/* CLIENT'S EMAIL  */}
+      <Label
+        label="Client's Email"
+        error={errors?.clientEmail?.message}
+        htmlFor="clientEmail"
+      />
       <input
         type="text"
-        name="client-address"
-        id="client-address"
-        value="London, south west"
-        className="input"
-      />{" "}
-      <div className="flex items-center gap-5 flex-wrap pt-5">
-        <div className="flex flex-col space-y-3 w-full md:w-[unset]">
-          <label htmlFor="client-city" className="label">
-            City
-          </label>
-          <input
-            type="text"
-            name="client-city"
-            id="client-city"
-            value="19 Union Terrace"
-            className="input  w-full"
-          />
-        </div>
+        name="clientEmail"
+        id="clientEmail"
+        className={`input ${errors?.clientEmail && "errorBorder"}`}
+        {...register("clientEmail", {
+          required: "can't be empty!",
+        })}
+      />
 
-        <div className="flex flex-col space-y-3 w-full md:w-[unset]">
-          <label htmlFor="client-postcode" className="label">
-            Post Code
-          </label>
-          <input
-            type="text"
-            name="client-postcode"
-            id="client-postcode"
-            value="E1 3EZ"
-            className="input  w-full"
-          />
-        </div>
+      {/* CLIENT'S ADDRESS  */}
+      <Label
+        label="Client's Address"
+        error={errors?.clientAddress?.message}
+        htmlFor="clientAddress"
+      />
 
-        <div className="flex flex-col space-y-3 w-full md:w-[unset]">
-          <label htmlFor="client-country" className="label">
-            Country
-          </label>
+      <input
+        type="text"
+        name="clientAddress"
+        id="clientAddress"
+        className={`input ${errors?.clientAddress && "errorBorder"}`}
+        {...register("clientAddress", {
+          required: "can't be empty!",
+        })}
+      />
+
+      <div className="gridDisplay pt-5">
+        <Box label="City" error={errors?.clientCity?.message}>
           <input
             type="text"
-            name="client-country"
-            id="client-country"
-            value="United Kingdom"
-            className="input w-full"
+            name="clientCity"
+            id="clientCity"
+            className={`input w-full ${errors?.clientCity && "errorBorder"}`}
+            {...register("clientCity", {
+              required: "can't be empty!",
+            })}
           />
-        </div>
+        </Box>
+
+        <Box label="Post code" error={errors?.clientPostcode?.message}>
+          <input
+            type="text"
+            name="clientPostcode"
+            id="clientPostcode"
+            className={`input w-full ${errors?.clientPostcode && "errorBorder"}`}
+            {...register("clientPostcode", {
+              required: "can't be empty!",
+            })}
+          />
+        </Box>
+
+        <Box label="Country" error={errors?.clientCountry?.message}>
+          <input
+            type="text"
+            name="clientCountry"
+            id="clientCountry"
+            className={`input w-full ${errors?.clientCountry && "errorBorder"}`}
+            {...register("clientCountry", {
+              required: "can't be empty!",
+            })}
+          />
+        </Box>
       </div>
     </>
   );

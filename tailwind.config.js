@@ -48,5 +48,33 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // To prevent aut0fill color from spoiling background color
+    function ({ addUtilities }) {
+      const newUtilities = {
+        // Light Mode Autofill Styles
+        '.autofillClass': {
+          '-webkit-box-shadow': '0 0 0px 1000px #dfe3fa inset !important',
+          '-webkit-text-fill-color': '#0c0e16 !important',
+        },
+        // Dark Mode Autofill Styles
+        '.dark .autofillClass': {
+          '-webkit-box-shadow': '0 0 0px 1000px #1e2139 inset !important',
+          '-webkit-text-fill-color': '#fff !important',
+        },
+        // Light Mode Hover, Focus, and Active States
+        '.autofillClass:focus, .autofillClass:hover, .autofillClass:active': {
+          '-webkit-box-shadow': '0 0 0px 1000px #dfe3fa inset !important',
+          '-webkit-text-fill-color': '#0c0e16 !important',
+        },
+        // Dark Mode Hover, Focus, and Active States
+        '.dark .autofillClass:focus, .dark .autofillClass:hover, .dark .autofillClass:active': {
+          '-webkit-box-shadow': '0 0 0px 1000px #1e2139 inset !important',
+          '-webkit-text-fill-color': '#fff !important',
+        },
+      };
+
+      addUtilities(newUtilities, ['responsive', 'hover', 'focus', 'dark']);
+    },
+  ],
 };

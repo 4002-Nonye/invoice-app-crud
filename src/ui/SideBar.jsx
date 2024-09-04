@@ -10,7 +10,7 @@ function SideBar() {
   const dispatch = useDispatch();
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-20 w-full items-center justify-between bg-darkblue-300 lg:h-screen lg:w-[unset] lg:flex-col lg:rounded-br-3xl lg:rounded-tr-3xl">
+    <aside className="fixed left-0 top-0 z-50 flex h-20 w-full items-center justify-between bg-darkblue-300 lg:h-screen lg:w-[unset] lg:flex-col lg:rounded-br-3xl lg:rounded-tr-3xl">
       <img src={logo} alt="logo" className="h-20 lg:h-[unset]" />
 
       <div className="flex items-center divide-x-2 divide-grey-100 lg:flex-col lg:divide-x-0 lg:divide-y-[0.5px]">
@@ -22,7 +22,7 @@ function SideBar() {
         />
         <img src={avatar} alt="avatar" className="w-full p-5 lg:p-7" />
       </div>
-    </div>
+    </aside>
   );
 }
 

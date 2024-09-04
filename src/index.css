@@ -9,14 +9,14 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "League Spartan", sans-serif;
-  transition: 1000ms;
+
+
+ 
 }
 
 body {
   position: relative;
-
   background-color: #f8f8fb;
-  
   scroll-behavior: smooth;
 }
 body.dark {
@@ -38,19 +38,34 @@ body.dark {
 ::-webkit-scrollbar {
   @apply hidden;
 }
+.gridDisplay {
+  @apply grid justify-between;
+  grid-template-columns: repeat(3, 11rem);
+  gap: 5px
+}
+
+.errorDiv {
+  @apply inline-flex items-center justify-between pt-6 text-sm;
+}
 
 .list {
   @apply w-16 overflow-scroll text-left;
 }
 .label {
-  @apply font-semibold text-grey-500 dark:text-grey-200;
+  @apply text-sm font-semibold text-grey-500 dark:text-grey-200;
 }
 .input {
-  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 caret-lightblue-300 transition-all duration-300 focus:outline-none focus:ring focus:ring-lightblue-300 dark:border-darkblue-400 dark:bg-darkblue-400 dark:text-white-100;
+  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 caret-lightblue-300  focus:outline-none focus:border-lightblue-300 dark:border-darkblue-400 dark:bg-darkblue-400 dark:text-white-100 font-bold autofillClass;
 }
 
+.errorBorder {
+  @apply   border-red-200 focus:outline-none;
+}
+.errorText{
+  @apply text-red-200
+}
 .react-datepicker__input-container input {
-  @apply  w-full cursor-pointer border-none bg-darkblue-100 bg-opacity-5 focus:outline-none dark:bg-darkblue-400 outline-none;
+  @apply w-full cursor-pointer border-none bg-darkblue-100 bg-opacity-5 outline-none focus:outline-none dark:bg-darkblue-400;
 }
 .react-datepicker-popper {
   @apply bg-white-100 dark:bg-darkblue-300;
@@ -65,7 +80,7 @@ body.dark {
   @apply border-lightblue-300;
 }
 .react-datepicker.wrapper {
-  @apply shadow-3xl w-full border-0 outline-none dark:bg-darkblue-300 dark:shadow-none;
+  @apply w-full border-0 shadow-3xl outline-none dark:bg-darkblue-300 dark:shadow-none;
 }
 .react-datepicker__month-container {
   @apply float-none;
@@ -108,4 +123,25 @@ body.dark {
 }
 .react-datepicker__day--outside-month {
   @apply text-grey-300;
+}
+
+/* LOADER ANIMATION */
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.spinner {
+  @apply mx-auto my-12 aspect-square w-16 animate-spin rounded-full;
+
+  background:
+    radial-gradient(farthest-side, #7c5dfa 94%, transparent) top/10px 10px
+      no-repeat,
+    conic-gradient(transparent 30%, #7c5dfa);
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 10px),
+    black 0
+  );
+  mask: radial-gradient(farthest-side, transparent calc(100% - 10px), black 0);
 }

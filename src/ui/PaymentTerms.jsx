@@ -11,12 +11,12 @@ function PaymentTerms() {
 
         <img src={arrowDown} alt="icon" />
       </div>
-      <div className="absolute top-24 flex w-full cursor-pointer flex-col divide-y-[1px] dark:divide-darkblue-600 rounded-md bg-white-100 font-bold shadow-md z-30 dark:bg-darkblue-300 text-md">
+      {/* <div className="absolute top-24 flex w-full cursor-pointer flex-col divide-y-[1px] dark:divide-darkblue-600 rounded-md bg-white-100 font-bold shadow-md z-30 dark:bg-darkblue-300 text-md">
         <span className={spanStyle}>Net 1 day</span>
         <span className={spanStyle}>Net 7 Days</span>
         <span className={spanStyle}>Net 14 Days</span>
         <span className={spanStyle}>Net 40 Days</span>
-      </div>
+      </div> */}
     </div>
   );
 }

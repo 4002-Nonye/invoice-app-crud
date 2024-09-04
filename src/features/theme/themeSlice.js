@@ -1,6 +1,6 @@
 // src/store/slices/themeSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import { getInitialTheme } from "../../utilities/helpers";
+import { getInitialTheme } from "../../utils/helpers";
 
 const initialTheme = getInitialTheme();
 
