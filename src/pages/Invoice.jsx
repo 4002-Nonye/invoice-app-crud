@@ -19,21 +19,21 @@ function Invoice() {
     queryFn: getInvoices,
   });
 
-  console.log(invoices);
+  ///////////////////////////////////////////////////////////////////////////////////////////////
   const status = "";
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////
   const filteredInvoice = invoices?.filter((invoice) => {
     if (status === "") return invoice;
     return invoice.status === status;
   });
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////
   const [showForm, setShowForm] = useState(false);
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////
   function handleShowForm() {
     setShowForm(true);
    
   }
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <>
       <div className="relative mt-20 flex w-full flex-col px-4 md:w-[unset] md:px-0 lg:mt-0">
@@ -53,7 +53,7 @@ function Invoice() {
             <CreateNewInvoice handleShowForm={handleShowForm} />
           </div>
         </div>
-        <div className="hide-scrollbar mt-4 max-h-[60vh] overflow-scroll md:mt-10 lg:mt-16">
+        <div className="hide-scrollbar mt-4 max-h-[70vh] overflow-scroll md:mt-8">
           {isLoading ? (
             <Spinner />
           ) : (

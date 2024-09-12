@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import calendar from "../assets/calendar.svg";
 
 
 function Calendar({startDate,setStartDate}) {
-  // const [startDate, setStartDate] = useState(new Date());
+ 
   return (
     <div className="w-full">
       <h3 className="label ">Calendar</h3>

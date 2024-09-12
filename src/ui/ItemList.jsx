@@ -53,7 +53,7 @@ function ItemList() {
           ))}
         </div>
 
-        <Button type="add">+ Add Item</Button>
+        <Button type="add" btnFn='button'>+ Add Item</Button>
       </div>
       <Error>
         <span>-All fields must be added</span>

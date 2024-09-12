@@ -1,21 +1,48 @@
 import supabase from "./supabase";
 
 export async function getInvoices() {
-  const { data, error } = await supabase
+  const { data: invoices, error } = await supabase
     .from("invoices")
     .select("*")
-    .order("created_at", { ascending: true });
+    .order("created_at", { ascending: false });
 
   if (error) throw new Error("Invoices could not be loaded");
-  return data;
+  return invoices;
 }
 
 export async function createEditInvoice(invoice) {
-  const { data, error } = await supabase
+  const { data: invoices, error } = await supabase
     .from("invoices")
     .insert([invoice])
     .select();
 
   if (error) throw new Error("Invoice could not be created");
-  return data;
+  return invoices;
+}
+
+export async function getInvoiceById(id) {
+  const { data: invoice, error } = await supabase
+    .from("invoices")
+    .select()
+    .eq("id", id);
+
+  if (error) throw new Error(`An error occured: ${error.message} `);
+  return invoice;
+}
+
+export async function editInvoice(invoiceItem) {
+  const { data: invoice, error } = await supabase
+    .from("invoices")
+    .update({ ...invoiceItem })
+    .eq("id", invoiceItem.id)
+    .select();
+
+  if (error) throw new Error(error.message);
+  return invoice;
+}
+
+export async function deleteInvoice(id) {
+  const {  error } = await supabase.from("invoices").delete().eq("id", id);
+  if (error) throw new Error('Invoice could not be deleted');
+ 
 }

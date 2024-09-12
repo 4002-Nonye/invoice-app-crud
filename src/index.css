@@ -9,9 +9,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "League Spartan", sans-serif;
-
-
- 
 }
 
 body {
@@ -41,7 +38,7 @@ body.dark {
 .gridDisplay {
   @apply grid justify-between;
   grid-template-columns: repeat(3, 11rem);
-  gap: 5px
+  gap: 5px;
 }
 
 .errorDiv {
@@ -55,14 +52,14 @@ body.dark {
   @apply text-sm font-semibold text-grey-500 dark:text-grey-200;
 }
 .input {
-  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 caret-lightblue-300  focus:outline-none focus:border-lightblue-300 dark:border-darkblue-400 dark:bg-darkblue-400 dark:text-white-100 font-bold autofillClass;
+  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 font-bold caret-lightblue-300 autofillClass focus:border-lightblue-300 focus:outline-none dark:border-darkblue-400 dark:bg-darkblue-400 dark:text-white-100;
 }
 
 .errorBorder {
-  @apply   border-red-200 focus:outline-none;
+  @apply border-red-200 focus:outline-none;
 }
-.errorText{
-  @apply text-red-200
+.errorText {
+  @apply text-red-200;
 }
 .react-datepicker__input-container input {
   @apply w-full cursor-pointer border-none bg-darkblue-100 bg-opacity-5 outline-none focus:outline-none dark:bg-darkblue-400;
@@ -71,7 +68,7 @@ body.dark {
   @apply bg-white-100 dark:bg-darkblue-300;
 }
 .react-datepicker-popper[style] {
-  transform: translate(140.5px, 1044px) !important;
+  /* transform: translate(140.5px, 450px) !important; */
 }
 .react-datepicker__header {
   @apply border-b-0 bg-white-100 p-4 pt-6 dark:bg-darkblue-300;

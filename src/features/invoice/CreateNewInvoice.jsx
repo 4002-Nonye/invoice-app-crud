@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import addIcon from "../../assets/add.svg";
 import Button from "../../ui/Button";
 

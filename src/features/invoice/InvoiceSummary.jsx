@@ -1,21 +1,40 @@
+/* eslint-disable react/prop-types */
 import MobileInvoiceSummary from "./MobileInvoiceSummary";
 
-function InvoiceSummary() {
+function InvoiceSummary({ invoice }) {
+  
+  const {
+    id,
+    productDescription,
+    clientAddress,
+    clientCity,
+    clientCountry,
+    clientEmail,
+    clientName,
+    clientPostcode,
+    startDate,
+    userAddress,
+    userCity,
+    userCountry,
+    userPostcode,
+  } = invoice[0];
   return (
-    <div className="container-for-all mt-9 dark:bg-darkblue-400  rounded-md p-7 shadow-md">
+    <div className="container-for-all mt-9 rounded-md p-7 shadow-md dark:bg-darkblue-400">
       <div className="flex flex-col justify-between md:flex-row">
         <div>
           <h2 className="text-xl font-bold text-darkblue-600 dark:text-white-100">
-            <span className="text-grey-100">#</span>XM9141
+            <span className="text-grey-100">#</span>XM{id}
           </h2>
-          <p className="text-grey-300 dark:text-white-100">Graphic design</p>
+          <p className="text-grey-300 dark:text-white-100">
+            {productDescription || '______' }
+          </p>
         </div>
 
         <div className="my-7 font-medium text-grey-300 md:my-0 md:text-right dark:text-white-100">
-          <p>19 union terrace</p>
-          <p>London</p>
-          <p>E1 3EZ</p>
-          <p>united kingdom</p>
+          <p>{userAddress || '______'}</p>
+          <p>{userCity || '______'}</p>
+          <p>{userPostcode|| '______'}</p>
+          <p>{userCountry|| '______'}</p>
         </div>
       </div>
       <div className="flex flex-col items-start md:flex-row md:space-x-24">
@@ -26,7 +45,7 @@ function InvoiceSummary() {
                 invoice date
               </h3>
               <p className="text-lg font-bold text-darkblue-600 dark:text-white-100">
-                21 Aug 2021
+                {startDate}
               </p>
             </div>
             <div className="space-y-3">
@@ -45,13 +64,13 @@ function InvoiceSummary() {
             </h3>
 
             <p className="text-lg font-bold text-darkblue-600 dark:text-white-100">
-              Alex Grim
+              {clientName || '______'}
             </p>
             <div className="text-left font-medium text-grey-500 dark:text-white-100">
-              <p>84 church way</p>
-              <p>Bradford</p>
-              <p>BD1 9PB</p>
-              <p>united kingdom</p>
+              <p>{clientAddress || '______'}</p>
+              <p>{clientCity || '______'}</p>
+              <p>{clientPostcode|| '______'}</p>
+              <p>{clientCountry|| '______'}</p>
             </div>
           </div>
         </div>
@@ -61,13 +80,13 @@ function InvoiceSummary() {
             Sent to
           </h3>
           <p className="font-bold text-darkblue-600 dark:text-white-100">
-            alexgrim@mail.com
+            {clientEmail|| '______'}
           </p>
         </div>
       </div>
 
-      <div className="mt-11 w-full flex flex-col rounded-md bg-white-200 font-medium text-grey-500 dark:bg-darkblue-300 pt-8">
-        <div className="hidden justify-between dark:text-white-200  px-8 pb-5 capitalize md:flex">
+      <div className="mt-11 flex w-full flex-col rounded-md bg-white-200 pt-8 font-medium text-grey-500 dark:bg-darkblue-300">
+        <div className="hidden justify-between px-8 pb-5 capitalize md:flex dark:text-white-200">
           <p>item name</p>
           <div className="inline-flex items-start gap-20">
             <p className="list uppercase">qty.</p>
@@ -80,14 +99,14 @@ function InvoiceSummary() {
           {" "}
           <div className="px-8 pt-4">
             <div className="flex justify-between pb-4">
-              <p className="text-lg font-bold dark:text-white-200  text-darkblue-600">
+              <p className="text-lg font-bold text-darkblue-600 dark:text-white-200">
                 Banner design
               </p>
 
-              <div className="inline-flex dark:text-white-200  items-start gap-20">
+              <div className="inline-flex items-start gap-20 dark:text-white-200">
                 <p className="list">200</p>
                 <p className="list">$6000</p>
-                <p className="list text-lg font-bold dark:text-white-200 text-darkblue-600">
+                <p className="list text-lg font-bold text-darkblue-600 dark:text-white-200">
                   $1200000
                 </p>
               </div>
