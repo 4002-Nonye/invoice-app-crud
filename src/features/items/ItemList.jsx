@@ -1,6 +1,6 @@
-import Items from "./Items";
-import Button from "../ui/Button";
-import Error from "./Error";
+import Items from './Items'
+import Button from "../../ui/Button";
+import Error from "../../ui/Error";
 
 function ItemList() {
   const itemArray = [

@@ -2,7 +2,7 @@ import arrowLeft from "../assets/arrow-left.svg";
 import InvoiceSummary from "../features/invoice/InvoiceSummary";
 import DeletePrompt from "../ui/DeletePrompt";
 import Button from "../ui/Button";
-import CreateEditInvoice from "../ui/CreateEditInvoice";
+import CreateEditInvoice from "../features/invoice/CreateEditInvoice";
 import Overlay from "../ui/Overlay";
 import { useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";

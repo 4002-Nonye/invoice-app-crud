@@ -8,16 +8,16 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   createEditInvoice,
   editInvoice as editInvoiceApi,
-} from "../services/apiInvoice";
-import { formatDate } from "../utils/helpers";
+} from "../../services/apiInvoice";
+import { formatDate } from "../../utils/helpers";
 
-import UserInput from "../features/user/UserInput";
-import ClientInput from "../features/client/ClientInput";
-import Calendar from "./Calendar";
-import PaymentTerms from "./PaymentTerms";
-import ItemList from "./ItemList";
-import Cta from "./Cta";
-import Description from "./Description";
+import UserInput from "../user/UserInput";
+import ClientInput from "../client/ClientInput";
+import Calendar from "../../ui/Calendar";
+import PaymentTerms from "../../ui/PaymentTerms";
+import ItemList from "../items/ItemList";
+import Cta from "../../ui/Cta";
+import Description from "../../ui/Description";
 
 function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
   const queryClient = useQueryClient();

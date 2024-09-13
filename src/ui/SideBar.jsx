@@ -2,12 +2,12 @@ import logo from "../assets/logo.svg";
 import moonIcon from "../assets/moon.svg";
 import sunIcon from "../assets/sun.svg";
 import avatar from "../assets/avatar.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "../features/theme/themeSlice";
+import { useTheme } from "../context/ThemeContext";
 
 function SideBar() {
-  const uiTheme = useSelector((state) => state.theme.theme);
-  const dispatch = useDispatch();
+  // const uiTheme = useSelector((state) => state.theme.theme);
+  // const dispatch = useDispatch();
+  const { toggleTheme, theme } = useTheme();
 
   return (
     <aside className="fixed left-0 top-0 z-50 flex h-20 w-full items-center justify-between bg-darkblue-300 lg:h-screen lg:w-[unset] lg:flex-col lg:rounded-br-3xl lg:rounded-tr-3xl">
@@ -15,8 +15,8 @@ function SideBar() {
 
       <div className="flex items-center divide-x-2 divide-grey-100 lg:flex-col lg:divide-x-0 lg:divide-y-[0.5px]">
         <img
-          onClick={()=>dispatch(toggleTheme())}
-          src={`${uiTheme === "dark" ? sunIcon : moonIcon}`}
+          onClick={toggleTheme}
+          src={theme === "light" ? moonIcon : sunIcon}
           alt="themeIcon"
           className="cursor-pointer p-5 lg:p-8"
         />

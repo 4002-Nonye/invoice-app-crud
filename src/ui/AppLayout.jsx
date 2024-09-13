@@ -1,19 +1,18 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
 import SideBar from "./SideBar";
-
+import { useTheme } from "../context/ThemeContext";
 
 function AppLayout() {
-  const uiTheme = useSelector((state) => state.theme.theme);
+  const { theme: uiTheme } = useTheme();
   useEffect(() => {
     if (uiTheme === "dark") document.body.classList.add("dark");
     else {
       document.body.classList.remove("dark");
     }
+    localStorage.setItem('theme',uiTheme)
   }, [uiTheme]);
-
 
   return (
     <>

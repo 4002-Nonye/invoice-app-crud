@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import CreateNewInvoice from "../features/invoice/CreateNewInvoice";
+import CreateNewInvoice from "../ui/CreateNewInvoice";
 import EmptyInvoice from "../features/invoice/EmptyInvoice";
 import FilterInvoice from "../features/invoice/FilterInvoice";
 import InvoiceItem from "../features/invoice/InvoiceItem";
 import { getInvoices } from "../services/apiInvoice";
 import Spinner from "../ui/Spinner";
 import { useState } from "react";
-import CreateEditInvoice from "../ui/CreateEditInvoice";
+import CreateEditInvoice from "../features/invoice/CreateEditInvoice";
 import Overlay from "../ui/Overlay";
 
 function Invoice() {
