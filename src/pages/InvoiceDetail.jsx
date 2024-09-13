@@ -5,19 +5,18 @@ import Button from "../ui/Button";
 import CreateEditInvoice from "../features/invoice/CreateEditInvoice";
 import Overlay from "../ui/Overlay";
 import { useState } from "react";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { editInvoice, getInvoiceById } from "../services/apiInvoice";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../ui/Spinner";
 import toast from "react-hot-toast";
-import { deleteInvoice as deleteInvoiceApi } from "../services/apiInvoice";
+import { useDeleteInvoice } from "../features/invoice/useDeleteInvoice";
+import { useInvoice } from "../features/invoice/useInvoice";
 
 function InvoiceDetail() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const queryClient = useQueryClient();
- 
-
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
   // use the current ID of invoice clicked to fetch details
@@ -25,25 +24,17 @@ function InvoiceDetail() {
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
-  const {
-    isLoading,
-    data: invoice,
-    error,
-  } = useQuery({
-    queryKey: ["Invoice"],
-    queryFn: () => getInvoiceById(id),
-  });
+  const { isLoading, invoice, error } = useInvoice(id);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const { mutate:markAsPaid, isUpdating } = useMutation({
+  const { mutate: markAsPaid, isUpdating } = useMutation({
     mutationFn: editInvoice,
     onSuccess: () => {
       toast.success("Invoice marked as paid");
       queryClient.invalidateQueries({
         queryKey: ["Invoice"],
       });
-    
     },
     onError: (err) => toast.error(err.message),
   });
@@ -58,24 +49,12 @@ function InvoiceDetail() {
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const { mutate: deleteInvoice, isDeleting } = useMutation({
-    mutationFn: deleteInvoiceApi,
-    onSuccess: () => {
-      toast.success("Invoice successfully deleted");
-      queryClient.invalidateQueries({
-        queryKey: ["invoices"],
-      });
-      navigate('/')
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const { isDeleting, deleteInvoice } = useDeleteInvoice();
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   function handleDelete(id) {
-    console.log(id);
-    deleteInvoice(id);
-   
+    deleteInvoice(id, { onSuccess: () => navigate("/") });
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   if (isLoading || isUpdating) return <Spinner />;

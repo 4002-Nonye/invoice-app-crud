@@ -4,11 +4,7 @@ import Button from "./Button";
 
 function CreateNewInvoice({ handleShowForm }) {
   return (
-    <Button
-      onClick={handleShowForm}
-     type='new'
-    >
-      {" "}
+    <Button onClick={handleShowForm} type="new">
       <span>
         <img src={addIcon} alt="addIcon" className="w-6" />
       </span>

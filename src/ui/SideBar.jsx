@@ -1,12 +1,13 @@
+import { useTheme } from "../context/ThemeContext";
+
 import logo from "../assets/logo.svg";
 import moonIcon from "../assets/moon.svg";
 import sunIcon from "../assets/sun.svg";
 import avatar from "../assets/avatar.svg";
-import { useTheme } from "../context/ThemeContext";
+
+
 
 function SideBar() {
-  // const uiTheme = useSelector((state) => state.theme.theme);
-  // const dispatch = useDispatch();
   const { toggleTheme, theme } = useTheme();
 
   return (

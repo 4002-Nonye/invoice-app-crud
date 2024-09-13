@@ -1,24 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
+
 import CreateNewInvoice from "../ui/CreateNewInvoice";
 import EmptyInvoice from "../features/invoice/EmptyInvoice";
 import FilterInvoice from "../features/invoice/FilterInvoice";
 import InvoiceItem from "../features/invoice/InvoiceItem";
-import { getInvoices } from "../services/apiInvoice";
+
 import Spinner from "../ui/Spinner";
 import { useState } from "react";
 import CreateEditInvoice from "../features/invoice/CreateEditInvoice";
 import Overlay from "../ui/Overlay";
+import { useInvoices } from "../features/invoice/useInvoices";
 
-function Invoice() {
-  const {
-    isLoading,
-    data: invoices,
-    error,
-  } = useQuery({
-    queryKey: ["invoices"],
-    queryFn: getInvoices,
-  });
-
+function Invoices() {
+ 
+  const { isLoading, invoices, error } = useInvoices();
   ///////////////////////////////////////////////////////////////////////////////////////////////
   const status = "";
   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +25,6 @@ function Invoice() {
   ///////////////////////////////////////////////////////////////////////////////////////////////
   function handleShowForm() {
     setShowForm(true);
-   
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -76,4 +69,4 @@ function Invoice() {
   );
 }
 
-export default Invoice;
+export default Invoices;

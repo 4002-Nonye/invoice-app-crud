@@ -10,7 +10,7 @@ export async function getInvoices() {
   return invoices;
 }
 
-export async function createEditInvoice(invoice) {
+export async function createInvoice(invoice) {
   const { data: invoices, error } = await supabase
     .from("invoices")
     .insert([invoice])
@@ -42,7 +42,6 @@ export async function editInvoice(invoiceItem) {
 }
 
 export async function deleteInvoice(id) {
-  const {  error } = await supabase.from("invoices").delete().eq("id", id);
-  if (error) throw new Error('Invoice could not be deleted');
- 
+  const { error } = await supabase.from("invoices").delete().eq("id", id);
+  if (error) throw new Error("Invoice could not be deleted");
 }

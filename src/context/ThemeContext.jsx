@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useContext, useReducer } from "react";
 
 import { getInitialTheme } from "../utils/helpers";

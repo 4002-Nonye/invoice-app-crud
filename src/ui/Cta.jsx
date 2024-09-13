@@ -12,7 +12,7 @@ function Cta({ isCreating, discard, isEditSession,handleDraft }) {
       </Button>
       <div className="flex justify-between md:gap-7">
         {!isEditSession && (
-          <Button onClick={handleDraft } btnFn="button" type="draft">
+          <Button onClick={handleDraft} btnFn="button" type="draft">
             Save as Draft
           </Button>
         )}

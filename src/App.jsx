@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 
 import AppLayout from "./ui/AppLayout";
-import Invoice from "./pages/Invoice";
+import Invoices from "./pages/Invoices";
 import InvoiceDetail from "./pages/InvoiceDetail";
 
 
@@ -22,7 +22,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route path="/" element={<Invoice />} />
+            <Route path="/" element={<Invoices />} />
             <Route path="/invoice/:id" element={<InvoiceDetail />} />
           </Route>
         </Routes>

@@ -1,15 +1,13 @@
 /* eslint-disable react/prop-types */
-import toast from "react-hot-toast";
-
 import { useState } from "react";
+
+import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import {
-  createEditInvoice,
-  editInvoice as editInvoiceApi,
-} from "../../services/apiInvoice";
 import { formatDate } from "../../utils/helpers";
+import { useCreateInvoice } from "./useCreateInvoice";
+import { useEditInvoice } from "./useEditInvoice";
 
 import UserInput from "../user/UserInput";
 import ClientInput from "../client/ClientInput";
@@ -20,9 +18,6 @@ import Cta from "../../ui/Cta";
 import Description from "../../ui/Description";
 
 function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
-  const queryClient = useQueryClient();
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // This is to get the current invoice that is to be edited and populating the form with the existing data
   const { id: editId, ...editValues } = invoiceToEdit;
@@ -47,28 +42,10 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
   });
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const { mutate, isLoading: isCreating } = useMutation({
-    mutationFn: createEditInvoice,
-    onSuccess: () => {
-      toast.success("Invoice successfully created");
-      queryClient.invalidateQueries({
-        queryKey: ["invoices"],
-      });
-      reset();
-      setShowForm(false);
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const { mutate: createInvoice, isLoading: isCreating } = useCreateInvoice();
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const { mutate: editInvoice, isLoading: isEditing } = useMutation({
-    mutationFn: editInvoiceApi,
-    onSuccess: () => {
-      toast.success(`Invoice #XM${editId} successfully edited`);
-      queryClient.invalidateQueries({ queryKey: ["Invoice"] });
-      setShowForm(false);
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const { editInvoice, isEditing } = useEditInvoice();
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
   function onSubmit(data) {
@@ -76,44 +53,58 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
       ...data,
       startDate: formatDate(startDate),
       totalAmount: 8500,
+      status:"pending",
       id: editId,
     };
 
     if (isEditSession) {
-      editInvoice(updatedData);
-    } else {
-      mutate({
-        ...data,
-        startDate: formatDate(startDate),
-        status: "pending",
-        totalAmount: 8500,
+      editInvoice(updatedData, {
+        onSuccess: () => setShowForm(false),
       });
+    } else {
+      createInvoice(
+        {
+          ...data,
+          startDate: formatDate(startDate),
+          totalAmount: 8500,
+          status: "pending",
+        },
+        {
+          onSuccess: () => {
+            toast.success("Invoice successfully created");
+            reset();
+            setShowForm(false);
+          },
+        },
+      );
     }
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const { mutate: saveAsDraft, isUpdating } = useMutation({
-    mutationFn: createEditInvoice,
-    onSuccess: () => {
-      toast.success("Saved as draft");
-      queryClient.invalidateQueries({ queryKey: ["invoices"] });
-      setShowForm(false);
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const { mutate: saveAsDraft, isLoading: isUpdating } = useCreateInvoice();
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
   function handleDraft() {
     const currentFormValue = getValues();
 
-    saveAsDraft({
-      ...currentFormValue,
-      status: "draft",
-      startDate: formatDate(startDate),
-    });
+    saveAsDraft(
+      {
+        ...currentFormValue,
+        status: "draft",
+        startDate: formatDate(startDate),
+      },
+      {
+        onSuccess: () => {
+          toast.success("Saved as draft");
+          setShowForm(false);
+        },
+      },
+    );
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  // for developmental process
   function onError(err) {
     console.log(err);
   }
