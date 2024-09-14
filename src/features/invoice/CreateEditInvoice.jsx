@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { formatDate } from "../../utils/helpers";
 import { useCreateInvoice } from "./useCreateInvoice";
@@ -18,7 +17,6 @@ import Cta from "../../ui/Cta";
 import Description from "../../ui/Description";
 
 function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
-
   // This is to get the current invoice that is to be edited and populating the form with the existing data
   const { id: editId, ...editValues } = invoiceToEdit;
 
@@ -28,7 +26,10 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    editValues.startDate || new Date(),
+  );
+  const [paymentTerm, setPaymentTerm] = useState(editValues.paymentTerm || 1);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const {
@@ -45,21 +46,24 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
   const { mutate: createInvoice, isLoading: isCreating } = useCreateInvoice();
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const { editInvoice, isEditing } = useEditInvoice();
+  const { mutate: editInvoice, isLoading: isEditing } = useEditInvoice();
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
   function onSubmit(data) {
     const updatedData = {
       ...data,
       startDate: formatDate(startDate),
-      totalAmount: 8500,
-      status:"pending",
+      paymentTerm,
       id: editId,
+      status: "pending",
     };
 
     if (isEditSession) {
       editInvoice(updatedData, {
-        onSuccess: () => setShowForm(false),
+        onSuccess: () => {
+          toast.success(`Invoice successfully edited`);
+          setShowForm(false);
+        },
       });
     } else {
       createInvoice(
@@ -68,6 +72,7 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
           startDate: formatDate(startDate),
           totalAmount: 8500,
           status: "pending",
+          paymentTerm,
         },
         {
           onSuccess: () => {
@@ -92,6 +97,7 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
         ...currentFormValue,
         status: "draft",
         startDate: formatDate(startDate),
+        paymentTerm,
       },
       {
         onSuccess: () => {
@@ -114,6 +120,10 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
     reset();
     setShowForm(false);
   }
+
+  function handlePaymentTerms(term) {
+    setPaymentTerm(term);
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onError)}
@@ -128,7 +138,10 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
         <ClientInput register={register} errors={errors} />
         <div className="flex w-full flex-col gap-10 pt-5 md:flex-row">
           <Calendar startDate={startDate} setStartDate={setStartDate} />
-          <PaymentTerms />
+          <PaymentTerms
+            paymentTerm={paymentTerm}
+            handlePaymentTerms={handlePaymentTerms}
+          />
         </div>
         <Description register={register} errors={errors} />
         <ItemList />

@@ -33,7 +33,7 @@ export async function getInvoiceById(id) {
 export async function editInvoice(invoiceItem) {
   const { data: invoice, error } = await supabase
     .from("invoices")
-    .update({ ...invoiceItem })
+    .update({...invoiceItem })
     .eq("id", invoiceItem.id)
     .select();
 

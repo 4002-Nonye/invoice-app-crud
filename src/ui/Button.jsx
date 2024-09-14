@@ -13,7 +13,7 @@ function Button({ children, type, className, onClick, btnFn, disabled ,to}) {
     cancel: `${baseButtonStyle}  bg-darkblue-100 bg-opacity-35 hover:bg-opacity-100 dark:bg-darkblue-300 dark:text-white-200 `,
     add: `${baseButtonStyle} bg-darkblue-100 bg-opacity-35 hover:bg-opacity-100 text-lightblue-100 text-lg  w-full mt-7 dark:bg-darkblue-400 dark:text-white-200`,
     draft: `${baseButtonStyle} bg-darkblue-300 hover:bg-darkblue-500 text-grey-100  dark:bg-darkblue-200 dark:hover:bg-darkblue-400 dark:text-white-200`,
-    submit: `${baseButtonStyle}  text-white-100 bg-lightblue-300 hover:bg-lightblue-200 `,
+    submit: `${baseButtonStyle}  text-white-100 bg-lightblue-300 hover:bg-lightblue-200 w-40`,
     new: `flex cursor-pointer items-center gap-1.5 rounded-full bg-lightblue-300 px-2 py-1.5 font-semibold capitalize text-white-200 md:px-3 md:py-2`,
   };
 

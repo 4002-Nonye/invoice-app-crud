@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { addDaysToDate } from "../../utils/helpers";
 import MobileInvoiceSummary from "./MobileInvoiceSummary";
 
 function InvoiceSummary({ invoice }) {
@@ -17,6 +18,7 @@ function InvoiceSummary({ invoice }) {
     userCity,
     userCountry,
     userPostcode,
+    paymentTerm
   } = invoice[0];
   return (
     <div className="container-for-all mt-9 rounded-md p-7 shadow-md dark:bg-darkblue-400">
@@ -53,7 +55,7 @@ function InvoiceSummary({ invoice }) {
                 payment due
               </h3>
               <p className="text-lg font-bold text-darkblue-600 dark:text-white-100">
-                20 sep 2021
+             {addDaysToDate(startDate,paymentTerm)}
               </p>
             </div>
           </div>

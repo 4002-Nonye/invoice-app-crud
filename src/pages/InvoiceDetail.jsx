@@ -1,63 +1,59 @@
-import arrowLeft from "../assets/arrow-left.svg";
-import InvoiceSummary from "../features/invoice/InvoiceSummary";
-import DeletePrompt from "../ui/DeletePrompt";
-import Button from "../ui/Button";
-import CreateEditInvoice from "../features/invoice/CreateEditInvoice";
-import Overlay from "../ui/Overlay";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { editInvoice, getInvoiceById } from "../services/apiInvoice";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Spinner from "../ui/Spinner";
+
 import toast from "react-hot-toast";
+
+import CreateEditInvoice from "../features/invoice/CreateEditInvoice";
+import InvoiceSummary from "../features/invoice/InvoiceSummary";
+import DeletePrompt from "../ui/DeletePrompt";
+import Overlay from "../ui/Overlay";
+import Button from "../ui/Button";
+import Spinner from "../ui/Spinner";
+import arrowLeft from "../assets/arrow-left.svg";
+
 import { useDeleteInvoice } from "../features/invoice/useDeleteInvoice";
 import { useInvoice } from "../features/invoice/useInvoice";
+import { useEditInvoice } from "../features/invoice/useEditInvoice";
 
 function InvoiceDetail() {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
-  const queryClient = useQueryClient();
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  // use the current ID of invoice clicked to fetch details
+  
+  // use the current ID of invoice clicked to fetch details of an invoice
   const { id } = useParams();
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
+  // get invoice by id
   const { isLoading, invoice, error } = useInvoice(id);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const { mutate: markAsPaid, isUpdating } = useMutation({
-    mutationFn: editInvoice,
-    onSuccess: () => {
-      toast.success("Invoice marked as paid");
-      queryClient.invalidateQueries({
-        queryKey: ["Invoice"],
-      });
-    },
-    onError: (err) => toast.error(err.message),
-  });
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
   // to mark invoice as paid
+  const { mutate: markAsPaid, isLoading: isUpdating } = useEditInvoice();
+
   function handleStatusUpdate(invoice) {
-    markAsPaid({
-      ...invoice,
-      status: "paid",
-    });
+    markAsPaid(
+      {
+        ...invoice,
+        status: "paid",
+      },
+      {
+        onSuccess: () => {
+          toast.success("Invoice marked as paid");
+        },
+      },
+    );
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const { isDeleting, deleteInvoice } = useDeleteInvoice();
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
-
   function handleDelete(id) {
     deleteInvoice(id, { onSuccess: () => navigate("/") });
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
-  if (isLoading || isUpdating) return <Spinner />;
+  if (isLoading ) return <Spinner />;
   return (
     <>
       <div className="relative mt-20 flex w-[90%] flex-col pb-12 md:w-[45rem] lg:mt-[unset]">
@@ -119,5 +115,3 @@ function InvoiceDetail() {
 }
 
 export default InvoiceDetail;
-
-// handle hover states for dark mode element

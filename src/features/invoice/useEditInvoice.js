@@ -4,13 +4,12 @@ import toast from "react-hot-toast";
 
 export function useEditInvoice() {
   const queryClient = useQueryClient();
-  const { mutate: editInvoice, isLoading: isEditing } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: editInvoiceApi,
     onSuccess: () => {
-      toast.success(`Invoice successfully edited`);
-      queryClient.invalidateQueries({ queryKey: ["Invoice"] });
+     queryClient.invalidateQueries({ queryKey: ["Invoice"] });
     },
     onError: (err) => toast.error(err.message),
   });
-  return { editInvoice, isEditing };
+  return { mutate, isLoading };
 }

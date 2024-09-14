@@ -1,22 +1,39 @@
+import { useState } from "react";
 import arrowDown from "../assets/arrow-down.svg";
+import { formatWord } from "../utils/helpers";
 
-function PaymentTerms() {
+const paymentTermsArr = [
+  { id: 1, day: 1 },
+  { id: 2, day: 7 },
+  { id: 3, day: 14 },
+  { id: 4, day: 40 },
+];
+
+function PaymentTerms({paymentTerm,handlePaymentTerms}) {
+  const [showPaymentTerms, setShowPaymentTerms] = useState(false);
   const spanStyle =
     "p-5 text-darkblue-600 transition-all duration-500 hover:text-lightblue-300 dark:text-white-100";
   return (
-    <div className="relative w-full">
+    <div
+      className="relative w-full"
+      onClick={() => setShowPaymentTerms((show) => !show)}
+    >
       <h3 className="label">Payment Terms</h3>
-      <div className="flex  cursor-pointer justify-between rounded-sm border-darkblue-100 bg-darkblue-100 p-3 text-md font-bold text-darkblue-600 input">
-        <span> 30 Net Days</span>
+      <div className="text-md input flex cursor-pointer justify-between rounded-sm border-darkblue-100 bg-darkblue-100 p-3 font-bold text-darkblue-600">
+        <span> {`${paymentTerm} Net ${formatWord(paymentTerm, "Day")}`}</span>
 
         <img src={arrowDown} alt="icon" />
       </div>
-      {/* <div className="absolute top-24 flex w-full cursor-pointer flex-col divide-y-[1px] dark:divide-darkblue-600 rounded-md bg-white-100 font-bold shadow-md z-30 dark:bg-darkblue-300 text-md">
-        <span className={spanStyle}>Net 1 day</span>
-        <span className={spanStyle}>Net 7 Days</span>
-        <span className={spanStyle}>Net 14 Days</span>
-        <span className={spanStyle}>Net 40 Days</span>
-      </div> */}
+
+      {showPaymentTerms && (
+        <div className="text-md absolute top-24 z-30 flex w-full cursor-pointer flex-col divide-y-[1px] rounded-md bg-white-100 font-bold shadow-md dark:divide-darkblue-600 dark:bg-darkblue-300">
+          {paymentTermsArr.map((terms) => (
+            <span key={terms.id} className={spanStyle} onClick={()=>handlePaymentTerms(terms.day)}>
+              {` Net ${terms.day} ${formatWord(terms.day, "day")}`}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

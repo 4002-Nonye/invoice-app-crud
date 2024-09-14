@@ -1,4 +1,3 @@
-
 import CreateNewInvoice from "../ui/CreateNewInvoice";
 import EmptyInvoice from "../features/invoice/EmptyInvoice";
 import FilterInvoice from "../features/invoice/FilterInvoice";
@@ -9,9 +8,9 @@ import { useState } from "react";
 import CreateEditInvoice from "../features/invoice/CreateEditInvoice";
 import Overlay from "../ui/Overlay";
 import { useInvoices } from "../features/invoice/useInvoices";
+import { formatWord } from "../utils/helpers";
 
 function Invoices() {
- 
   const { isLoading, invoices, error } = useInvoices();
   ///////////////////////////////////////////////////////////////////////////////////////////////
   const status = "";
@@ -35,9 +34,9 @@ function Invoices() {
           <div>
             <h1 className="text-3xl font-bold capitalize">invoices</h1>
             <p className="text-grey-200 dark:text-white-100">
-              There {filteredInvoice?.length > 1 ? "are" : "is"}{" "}
-              {filteredInvoice?.length || 0} {status === "" ? "total" : status}{" "}
-              {filteredInvoice?.length > 1 ? "invoices" : "invoice"}
+              There {filteredInvoice?.length > 1 ? "are" : "is"}{' '}
+              {filteredInvoice?.length || 0} {status === "" ? "total" : status}{' '}
+              {formatWord(filteredInvoice?.length, "invoice")}
             </p>
           </div>
 
