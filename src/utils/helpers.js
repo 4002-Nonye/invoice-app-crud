@@ -28,3 +28,4 @@ export function formatWord(num, word) {
   if (num <= 1) return word;
   return `${word}s`;
 }
+

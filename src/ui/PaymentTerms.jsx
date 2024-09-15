@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-import arrowDown from "../assets/arrow-down.svg";
-import { formatWord } from "../utils/helpers";
 
+import { formatWord } from "../utils/helpers";
+import arrowDown from "../assets/arrow-down.svg";
 const paymentTermsArr = [
   { id: 1, day: 1 },
   { id: 2, day: 7 },

@@ -3,7 +3,6 @@ import { addDaysToDate } from "../../utils/helpers";
 import MobileInvoiceSummary from "./MobileInvoiceSummary";
 
 function InvoiceSummary({ invoice }) {
-  
   const {
     id,
     productDescription,
@@ -18,8 +17,12 @@ function InvoiceSummary({ invoice }) {
     userCity,
     userCountry,
     userPostcode,
-    paymentTerm
+    paymentTerm,
+    items,
   } = invoice[0];
+
+  const itemArr = JSON.parse(items);
+
   return (
     <div className="container-for-all mt-9 rounded-md p-7 shadow-md dark:bg-darkblue-400">
       <div className="flex flex-col justify-between md:flex-row">
@@ -28,15 +31,15 @@ function InvoiceSummary({ invoice }) {
             <span className="text-grey-100">#</span>XM{id}
           </h2>
           <p className="text-grey-300 dark:text-white-100">
-            {productDescription || '______' }
+            {productDescription || "______"}
           </p>
         </div>
 
         <div className="my-7 font-medium text-grey-300 md:my-0 md:text-right dark:text-white-100">
-          <p>{userAddress || '______'}</p>
-          <p>{userCity || '______'}</p>
-          <p>{userPostcode|| '______'}</p>
-          <p>{userCountry|| '______'}</p>
+          <p>{userAddress || "______"}</p>
+          <p>{userCity || "______"}</p>
+          <p>{userPostcode || "______"}</p>
+          <p>{userCountry || "______"}</p>
         </div>
       </div>
       <div className="flex flex-col items-start md:flex-row md:space-x-24">
@@ -55,7 +58,7 @@ function InvoiceSummary({ invoice }) {
                 payment due
               </h3>
               <p className="text-lg font-bold text-darkblue-600 dark:text-white-100">
-             {addDaysToDate(startDate,paymentTerm)}
+                {addDaysToDate(startDate, paymentTerm)}
               </p>
             </div>
           </div>
@@ -66,13 +69,13 @@ function InvoiceSummary({ invoice }) {
             </h3>
 
             <p className="text-lg font-bold text-darkblue-600 dark:text-white-100">
-              {clientName || '______'}
+              {clientName || "______"}
             </p>
             <div className="text-left font-medium text-grey-500 dark:text-white-100">
-              <p>{clientAddress || '______'}</p>
-              <p>{clientCity || '______'}</p>
-              <p>{clientPostcode|| '______'}</p>
-              <p>{clientCountry|| '______'}</p>
+              <p>{clientAddress || "______"}</p>
+              <p>{clientCity || "______"}</p>
+              <p>{clientPostcode || "______"}</p>
+              <p>{clientCountry || "______"}</p>
             </div>
           </div>
         </div>
@@ -82,7 +85,7 @@ function InvoiceSummary({ invoice }) {
             Sent to
           </h3>
           <p className="font-bold text-darkblue-600 dark:text-white-100">
-            {clientEmail|| '______'}
+            {clientEmail || "______"}
           </p>
         </div>
       </div>
@@ -97,21 +100,28 @@ function InvoiceSummary({ invoice }) {
           </div>
         </div>
 
-        <div className="text-md hidden h-28 overflow-scroll md:block">
+        {/* h-28 overflow-scroll */}
+        <div className="text-md  hidden md:block">
           {" "}
           <div className="px-8 pt-4">
-            <div className="flex justify-between pb-4">
-              <p className="text-lg font-bold text-darkblue-600 dark:text-white-200">
-                Banner design
-              </p>
+            <div className="flex justify-between flex-col pb-4">
+              {itemArr.map((item) => {
+                return (
+                  <div key={item.id} className="flex">
+                    <p className="text-lg font-bold text-darkblue-600 dark:text-white-200">
+                      {item.itemName}
+                    </p>
 
-              <div className="inline-flex items-start gap-20 dark:text-white-200">
-                <p className="list">200</p>
-                <p className="list">$6000</p>
-                <p className="list text-lg font-bold text-darkblue-600 dark:text-white-200">
-                  $1200000
-                </p>
-              </div>
+                    <div className="inline-flex items-start gap-20 dark:text-white-200">
+                      <p className="list">{item.itemQty}</p>
+                      <p className="list">${item.itemPrice}</p>
+                      <p className="list text-lg font-bold text-darkblue-600 dark:text-white-200">
+                        ${item.itemQty*item.itemPrice}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

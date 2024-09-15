@@ -1,38 +1,35 @@
-import Items from './Items'
+import Items from "./Items";
 import Button from "../../ui/Button";
 import Error from "../../ui/Error";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-function ItemList() {
-  const itemArray = [
-    { id: 1, itemName: "", qty: 0, price: 0, total: 0 },
-    {
-      id: 2,
-      itemName: "",
-      qty: 0,
-      price: 0,
-      total: 0,
-    },
-    {
-      id: 3,
-      itemName: "",
-      qty: 0,
-      price: 0,
-      total: 0,
-    },
-    {
-      id: 4,
-      itemName: "",
-      qty: 0,
-      price: 0,
-      total: 0,
-    },
-  ];
-  const newItem = {
-    id: 2,
-    itemName: "",
-    qty: 0,
-    price: 0,
-    total: 0,
+function ItemList({ register ,setValue}) {
+  const [itemsArr, setItemsArr] = useState([
+    { name: "", id: uuidv4(), qty: "", price: "" },
+  ]);
+  const newObj = { name: "", id: uuidv4(), qty: "", price: "" };
+
+  const handleAddItem = () => {
+    setItemsArr([...itemsArr, newObj]);
+    setValue('itemsArr',itemsArr)
+    console.log(itemsArr);
+  };
+  const handleDeleteItem = (id) => {
+    console.log(id);
+    const newItemArr = itemsArr.filter((item) => item.id !== id);
+    setItemsArr(newItemArr);
+ 
+  };
+
+  const handleInputChange = (id, field, value) => {
+    const updatedItem = itemsArr.map((item) => {
+      if (item.id === id) return { ...item, [field]: value };
+      else return item;
+    });
+    setItemsArr(updatedItem)
+
+    setValue('itemsArr',itemsArr)
   };
   return (
     <>
@@ -47,19 +44,29 @@ function ItemList() {
             <p className="label w-20">Total</p>
           </div>
         </div>
+
         <div className="h-48 w-full overflow-y-auto px-4 md:h-24">
-          {itemArray.map((item) => (
-            <Items key={item.id} item={item} />
+          {itemsArr.map((item) => (
+            <Items
+              key={item.id}
+              register={register}
+              item={item}
+              handleDeleteItem={handleDeleteItem}
+              handleInputChange={handleInputChange}
+            />
           ))}
+            <input type="hidden" value={JSON.stringify(itemsArr)}  {...register('itemsArr')}/>
         </div>
 
-        <Button type="add" btnFn='button'>+ Add Item</Button>
+        <Button type="add" btnFn="button" onClick={handleAddItem}>
+          + Add Item
+        </Button>
       </div>
-      <Error>
+      {/* <Error>
         <span>-All fields must be added</span>
-        <br/>
+        <br />
         <span>-An item must be added</span>
-      </Error>
+      </Error> */}
     </>
   );
 }

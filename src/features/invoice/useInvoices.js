@@ -11,5 +11,6 @@ export function useInvoices() {
     queryKey: ["invoices"],
     queryFn: getInvoices,
   });
+  console.log(invoices)
   return { error, isLoading, invoices };
 }

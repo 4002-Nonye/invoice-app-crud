@@ -38,6 +38,7 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
     reset,
     getValues,
     formState: { errors },
+    setValue
   } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
@@ -50,12 +51,18 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
   function onSubmit(data) {
+console.log(data)
+
+
+ 
     const updatedData = {
-      ...data,
+     ...data,
       startDate: formatDate(startDate),
       paymentTerm,
       id: editId,
       status: "pending",
+    
+      
     };
 
     if (isEditSession) {
@@ -73,6 +80,7 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
           totalAmount: 8500,
           status: "pending",
           paymentTerm,
+        
         },
         {
           onSuccess: () => {
@@ -144,7 +152,7 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
           />
         </div>
         <Description register={register} errors={errors} />
-        <ItemList />
+        <ItemList register={register} setValue={setValue} />
       </div>
 
       <div className="sticky bottom-0 left-0 w-full bg-white-200 p-0 dark:bg-darkblue-500">
