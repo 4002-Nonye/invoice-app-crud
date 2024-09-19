@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import { addDaysToDate } from "../../utils/helpers";
+import { addDaysToDate, generateId } from "../../utils/helpers";
 import MobileInvoiceSummary from "./MobileInvoiceSummary";
 
 function InvoiceSummary({ invoice }) {
   const {
-    id,
+    invoiceId,
     productDescription,
     clientAddress,
     clientCity,
@@ -18,17 +18,17 @@ function InvoiceSummary({ invoice }) {
     userCountry,
     userPostcode,
     paymentTerm,
-    items,
+    itemsArr,
+  
   } = invoice[0];
 
-  const itemArr = JSON.parse(items);
-
+generateId()
   return (
     <div className="container-for-all mt-9 rounded-md p-7 shadow-md dark:bg-darkblue-400">
       <div className="flex flex-col justify-between md:flex-row">
         <div>
           <h2 className="text-xl font-bold text-darkblue-600 dark:text-white-100">
-            <span className="text-grey-100">#</span>XM{id}
+            <span className="text-grey-100">#</span>{invoiceId}
           </h2>
           <p className="text-grey-300 dark:text-white-100">
             {productDescription || "______"}
@@ -101,22 +101,22 @@ function InvoiceSummary({ invoice }) {
         </div>
 
         {/* h-28 overflow-scroll */}
-        <div className="text-md  hidden md:block">
+        <div className="text-md hidden md:block">
           {" "}
           <div className="px-8 pt-4">
-            <div className="flex justify-between flex-col pb-4">
-              {itemArr.map((item) => {
+            <div className="flex flex-col justify-between pb-4">
+              {itemsArr.map((item) => {
                 return (
                   <div key={item.id} className="flex">
                     <p className="text-lg font-bold text-darkblue-600 dark:text-white-200">
-                      {item.itemName}
+                      {item.name}
                     </p>
 
                     <div className="inline-flex items-start gap-20 dark:text-white-200">
-                      <p className="list">{item.itemQty}</p>
-                      <p className="list">${item.itemPrice}</p>
+                      <p className="list">{item.qty}</p>
+                      <p className="list">${item.price}</p>
                       <p className="list text-lg font-bold text-darkblue-600 dark:text-white-200">
-                        ${item.itemQty*item.itemPrice}
+                        ${item.qty * item.price}
                       </p>
                     </div>
                   </div>
@@ -128,7 +128,9 @@ function InvoiceSummary({ invoice }) {
         <MobileInvoiceSummary />
         <div className="mt-6 flex justify-between rounded-md bg-darkblue-500 p-8 text-lg font-bold text-white-300">
           <p>Amount Due</p>
-          <p className="text-2xl">$550.90</p>
+          <p className="text-2xl">
+            ${itemsArr.reduce((prev, acc) => prev + acc.qty * acc.price, 0)}
+          </p>
         </div>
       </div>
     </div>

@@ -3,8 +3,8 @@ import { useState } from "react";
 
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-
-import { formatDate } from "../../utils/helpers";
+import { v4 as uuidv4 } from "uuid";
+import { formatDate, generateId } from "../../utils/helpers";
 import { useCreateInvoice } from "./useCreateInvoice";
 import { useEditInvoice } from "./useEditInvoice";
 
@@ -19,13 +19,16 @@ import Description from "../../ui/Description";
 function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
   // This is to get the current invoice that is to be edited and populating the form with the existing data
   const { id: editId, ...editValues } = invoiceToEdit;
+  const [isMissingValue, setIsMissingValue] = useState(false);
 
   //  We use this to check if the form was opened for creating or
   //editing the invoice by determining if there is an ID when the edit button is clicked
   const isEditSession = Boolean(editId);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  const [itemsArr, setItemsArr] = useState(
+    editValues.itemsArr || [{ name: "", id: uuidv4(), qty: "", price: "" }],
+  );
   const [startDate, setStartDate] = useState(
     editValues.startDate || new Date(),
   );
@@ -38,7 +41,7 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
     reset,
     getValues,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
@@ -51,18 +54,22 @@ function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
   function onSubmit(data) {
-console.log(data)
+    // check if any value is missing
+    const checkValue = data.itemsArr.some((item) =>
+      Object.values(item).includes(""),
+    );
+  
+    if (checkValue) {
+      setIsMissingValue(checkValue);
+      return;
+    }
 
-
- 
     const updatedData = {
-     ...data,
+      ...data,
       startDate: formatDate(startDate),
       paymentTerm,
       id: editId,
       status: "pending",
-    
-      
     };
 
     if (isEditSession) {
@@ -80,7 +87,7 @@ console.log(data)
           totalAmount: 8500,
           status: "pending",
           paymentTerm,
-        
+          invoiceId:generateId(),
         },
         {
           onSuccess: () => {
@@ -152,7 +159,13 @@ console.log(data)
           />
         </div>
         <Description register={register} errors={errors} />
-        <ItemList register={register} setValue={setValue} />
+        <ItemList
+          register={register}
+          setValue={setValue}
+          itemsArr={itemsArr}
+          setItemsArr={setItemsArr}
+          isMissingValue={isMissingValue}
+        />
       </div>
 
       <div className="sticky bottom-0 left-0 w-full bg-white-200 p-0 dark:bg-darkblue-500">

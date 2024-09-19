@@ -29,3 +29,43 @@ export function formatWord(num, word) {
   return `${word}s`;
 }
 
+const alphabets = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+
+export function generateId() {
+  const positon = Array.from(
+    { length: 2 },
+    () => alphabets[Math.floor(Math.random() * alphabets.length)],
+  ).join("");
+  const digits = Array.from({ length: 4 }, () =>
+    Math.floor(Math.random() * 10),
+  ).join("");
+
+  return `${positon}${digits}`;
+}

@@ -8,7 +8,7 @@ function Items({ item, handleDeleteItem, handleInputChange }) {
       <input
         className="input my-5 w-full text-darkblue-600 md:my-2 md:w-[19rem]"
         type="text"
-        placeholder={name}
+        value={name}
         onChange={(e) => handleInputChange(id, "name", e.target.value)}
       />
 
@@ -19,7 +19,7 @@ function Items({ item, handleDeleteItem, handleInputChange }) {
             id="itemQty"
             className="input w-16 text-darkblue-600"
             type="text"
-            placeholder={qty}
+            value={qty}
             onChange={(e) => handleInputChange(id, "qty", e.target.value)}
           />
         </div>
@@ -29,7 +29,7 @@ function Items({ item, handleDeleteItem, handleInputChange }) {
           <input
             className="input w-24 text-darkblue-600"
             type="text"
-            placeholder={price}
+            value={price}
             onChange={(e) => handleInputChange(id, "price", e.target.value)}
           />
         </div>

@@ -24,7 +24,7 @@ export async function getInvoiceById(id) {
   const { data: invoice, error } = await supabase
     .from("invoices")
     .select()
-    .eq("id", id);
+    .eq("invoiceId", id);
 
   if (error) throw new Error(`An error occured: ${error.message} `);
   return invoice;
@@ -34,7 +34,7 @@ export async function editInvoice(invoiceItem) {
   const { data: invoice, error } = await supabase
     .from("invoices")
     .update({...invoiceItem })
-    .eq("id", invoiceItem.id)
+    .eq("invoiceId", invoiceItem.invoiceId)
     .select();
 
   if (error) throw new Error(error.message);
@@ -42,6 +42,6 @@ export async function editInvoice(invoiceItem) {
 }
 
 export async function deleteInvoice(id) {
-  const { error } = await supabase.from("invoices").delete().eq("id", id);
+  const { error } = await supabase.from("invoices").delete().eq("invoiceId", id);
   if (error) throw new Error("Invoice could not be deleted");
 }

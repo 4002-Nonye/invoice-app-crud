@@ -1,25 +1,29 @@
+/* eslint-disable react/prop-types */
 import Items from "./Items";
 import Button from "../../ui/Button";
 import Error from "../../ui/Error";
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import toast from "react-hot-toast";
 
-function ItemList({ register ,setValue}) {
-  const [itemsArr, setItemsArr] = useState([
-    { name: "", id: uuidv4(), qty: "", price: "" },
-  ]);
+function ItemList({ register, setValue, setItemsArr, itemsArr ,isMissingValue}) {
   const newObj = { name: "", id: uuidv4(), qty: "", price: "" };
 
   const handleAddItem = () => {
     setItemsArr([...itemsArr, newObj]);
-    setValue('itemsArr',itemsArr)
-    console.log(itemsArr);
+    setValue("itemsArr", itemsArr);
   };
+
   const handleDeleteItem = (id) => {
-    console.log(id);
-    const newItemArr = itemsArr.filter((item) => item.id !== id);
-    setItemsArr(newItemArr);
- 
+// if the user tries to delete all items (omo werey😂)
+    if (itemsArr.length === 1) {
+      toast.error("An item must be added");
+      return
+    }
+    const newItemArr = itemsArr.filter((item) => item.id !== id); // Filter out the item with matching id
+
+    setItemsArr(newItemArr); // Update state with the new array
+
+    setValue("itemsArr", newItemArr); // Use the updated array for form value
   };
 
   const handleInputChange = (id, field, value) => {
@@ -27,9 +31,9 @@ function ItemList({ register ,setValue}) {
       if (item.id === id) return { ...item, [field]: value };
       else return item;
     });
-    setItemsArr(updatedItem)
+    setItemsArr(updatedItem);
 
-    setValue('itemsArr',itemsArr)
+    setValue("itemsArr", updatedItem);
   };
   return (
     <>
@@ -55,18 +59,23 @@ function ItemList({ register ,setValue}) {
               handleInputChange={handleInputChange}
             />
           ))}
-            <input type="hidden" value={JSON.stringify(itemsArr)}  {...register('itemsArr')}/>
+          <input
+            type="hidden"
+            value={JSON.stringify(itemsArr)}
+            {...register("itemsArr")}
+          />
         </div>
 
         <Button type="add" btnFn="button" onClick={handleAddItem}>
           + Add Item
         </Button>
       </div>
-      {/* <Error>
+      {isMissingValue&& <Error>
         <span>-All fields must be added</span>
         <br />
         <span>-An item must be added</span>
-      </Error> */}
+      </Error>}
+     
     </>
   );
 }
