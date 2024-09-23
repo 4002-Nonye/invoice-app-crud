@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 
+import { useInvoiceContext } from "../context/InvoiceContext";
 import Label from "./Label";
 
-function Description({ register, errors }) {
+function Description() {
+  const { register, errors } =useInvoiceContext()
   return (
     <>
       <Label

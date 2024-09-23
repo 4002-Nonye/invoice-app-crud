@@ -15,29 +15,36 @@ import PaymentTerms from "../../ui/PaymentTerms";
 import ItemList from "../items/ItemList";
 import Cta from "../../ui/Cta";
 import Description from "../../ui/Description";
-import { useInvoiceContext } from "../../context/InvoiceContext";
 
-function CreateEditInvoice({ setShowForm }) {
-  const {
-    editValues,
-    handleSubmit,
-    reset,
-    getValues,
-    startDate,
-    handleShowForm,
-  } = useInvoiceContext();
+function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
+  // This is to get the current invoice that is to be edited and populating the form with the existing data
+  const { id: editId, ...editValues } = invoiceToEdit;
+  const [isMissingValue, setIsMissingValue] = useState(false);
 
   //  We use this to check if the form was opened for creating or
   //editing the invoice by determining if there is an ID when the edit button is clicked
-  const { id: editId } = editValues;
   const isEditSession = Boolean(editId);
 
-  const [isMissingValue, setIsMissingValue] = useState(false);
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const [itemsArr, setItemsArr] = useState(
+    editValues.itemsArr || [{ name: "", id: uuidv4(), qty: "", price: "" }],
+  );
+  const [startDate, setStartDate] = useState(
+    editValues.startDate || new Date(),
+  );
   const [paymentTerm, setPaymentTerm] = useState(editValues.paymentTerm || 1);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  const {
+    handleSubmit,
+    register,
+    reset,
+    getValues,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    defaultValues: isEditSession ? editValues : {},
+  });
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const { mutate: createInvoice, isLoading: isCreating } = useCreateInvoice();
@@ -130,7 +137,6 @@ function CreateEditInvoice({ setShowForm }) {
   function handleDiscard() {
     reset();
     setShowForm(false);
-    handleShowForm();
   }
 
   function handlePaymentTerms(term) {
@@ -146,17 +152,23 @@ function CreateEditInvoice({ setShowForm }) {
         <h3 className="text-3xl font-bold dark:text-white-200">
           {isEditSession ? `Edit #XM${editId} ` : "New invoice"}
         </h3>
-        <UserInput />
-        <ClientInput />
+        <UserInput register={register} errors={errors} />
+        <ClientInput register={register} errors={errors} />
         <div className="flex w-full flex-col gap-10 pt-5 md:flex-row">
-          {/* <Calendar startDate={startDate} /> setStartDate={setStartDate}  */}
+          <Calendar startDate={startDate} setStartDate={setStartDate} />
           <PaymentTerms
             paymentTerm={paymentTerm}
             handlePaymentTerms={handlePaymentTerms}
           />
         </div>
-        <Description />
-        <ItemList isMissingValue={isMissingValue} />
+        <Description register={register} errors={errors} />
+        <ItemList
+          register={register}
+          setValue={setValue}
+          itemsArr={itemsArr}
+          setItemsArr={setItemsArr}
+          isMissingValue={isMissingValue}
+        />
       </div>
 
       <div className="sticky bottom-0 left-0 w-full bg-white-200 p-0 dark:bg-darkblue-500">

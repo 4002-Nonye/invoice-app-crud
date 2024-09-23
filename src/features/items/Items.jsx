@@ -5,20 +5,22 @@ function Items({ item, handleDeleteItem, handleInputChange }) {
   return (
     <div className="relative flex flex-col justify-between pb-3 font-bold md:flex-row md:pb-0">
       <label className="label md:hidden">Item Name</label>
-      <input
-        className="input my-5 w-full text-darkblue-600 md:my-2 md:w-[19rem]"
-        type="text"
-        value={name}
-        onChange={(e) => handleInputChange(id, "name", e.target.value)}
-      />
 
-      <div className="mb-7 inline-flex items-center gap-6 md:mb-0">
+      <div className="flex w-full items-center gap-7">
+        <input
+          className="input my-5 w-64 text-darkblue-600 md:my-2"
+          type="text"
+          value={name}
+          onChange={(e) => handleInputChange(id, "name", e.target.value)}
+        />
+
         <div className="flex flex-col">
           <label className="label md:hidden">Qty.</label>
           <input
             id="itemQty"
-            className="input w-16 text-darkblue-600"
-            type="text"
+            className="input w-12 text-center text-darkblue-600"
+            type="number"
+            placeholder="0"
             value={qty}
             onChange={(e) => handleInputChange(id, "qty", e.target.value)}
           />
@@ -27,19 +29,22 @@ function Items({ item, handleDeleteItem, handleInputChange }) {
         <div className="flex flex-col">
           <label className="label md:hidden">Price</label>
           <input
-            className="input w-24 text-darkblue-600"
-            type="text"
+            className="input w-20 text-center text-darkblue-600"
+            type="number"
             value={price}
-            onChange={(e) => handleInputChange(id, "price", e.target.value)}
+            placeholder="0.00"
+            onChange={(e) => {
+            handleInputChange(id, "price", e.target.value);
+            }}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex w-14 flex-col overflow-scroll">
           <p className="label md:hidden">Total</p>
-          <p className="m-auto w-20 p-3 text-grey-100 md:p-0 dark:text-white-100">
-            {price * qty}
+          <p className="m-auto text-grey-100 md:p-0 dark:text-white-100">
+            {(price * qty).toFixed(2)}
           </p>
         </div>
-      
+
         <div
           className="absolute right-0 text-center"
           onClick={() => handleDeleteItem(id)}

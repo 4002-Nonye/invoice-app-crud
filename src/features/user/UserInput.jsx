@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
+import { useInvoiceContext } from "../../context/InvoiceContext";
 import Box from "../../ui/Box";
 import Label from "../../ui/Label";
 
-function UserInput({ register, errors }) {
+function UserInput() {
+  const { register, errors } =useInvoiceContext()
   return (
     <>
       <h4 className="font-bold text-lightblue-300">Bill From</h4>

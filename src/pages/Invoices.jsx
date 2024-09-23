@@ -12,9 +12,10 @@ import { formatWord } from "../utils/helpers";
 
 function Invoices() {
   const { isLoading, invoices, error } = useInvoices();
-  
+  const [status, setStatus] = useState("");
+
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  const status = "";
+
   ///////////////////////////////////////////////////////////////////////////////////////////////
   const filteredInvoice = invoices?.filter((invoice) => {
     if (status === "") return invoice;
@@ -24,7 +25,7 @@ function Invoices() {
   const [showForm, setShowForm] = useState(false);
   ///////////////////////////////////////////////////////////////////////////////////////////////
   function handleShowForm() {
-    setShowForm(true);
+    setShowForm((show=>!show));
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -35,14 +36,14 @@ function Invoices() {
           <div>
             <h1 className="text-3xl font-bold capitalize">invoices</h1>
             <p className="text-grey-200 dark:text-white-100">
-              There {filteredInvoice?.length > 1 ? "are" : "is"}{' '}
-              {filteredInvoice?.length || 0} {status === "" ? "total" : status}{' '}
+              There {filteredInvoice?.length > 1 ? "are" : "is"}{" "}
+              {filteredInvoice?.length || 0} {status === "" ? "total" : status}{" "}
               {formatWord(filteredInvoice?.length, "invoice")}
             </p>
           </div>
 
           <div className="inline-flex items-center gap-2 md:gap-7">
-            <FilterInvoice />
+            <FilterInvoice setStatus={setStatus} status={status}/>
             <CreateNewInvoice handleShowForm={handleShowForm} />
           </div>
         </div>

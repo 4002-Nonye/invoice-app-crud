@@ -14,12 +14,13 @@ import arrowLeft from "../assets/arrow-left.svg";
 import { useDeleteInvoice } from "../features/invoice/useDeleteInvoice";
 import { useInvoice } from "../features/invoice/useInvoice";
 import { useEditInvoice } from "../features/invoice/useEditInvoice";
+import { useInvoiceContext } from "../context/InvoiceContext";
 
 function InvoiceDetail() {
+  const { dispatch } = useInvoiceContext();
   const navigate = useNavigate();
-  const [showForm, setShowForm] = useState(false);
+ const [showForm,setShowForm] = useState(false)
 
-  
   // use the current ID of invoice clicked to fetch details of an invoice
   const { id } = useParams();
 
@@ -53,7 +54,7 @@ function InvoiceDetail() {
     deleteInvoice(id, { onSuccess: () => navigate("/") });
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
-  if (isLoading ) return <Spinner />;
+  if (isLoading) return <Spinner />;
   return (
     <>
       <div className="relative mt-20 flex w-[90%] flex-col pb-12 md:w-[45rem] lg:mt-[unset]">
@@ -80,7 +81,13 @@ function InvoiceDetail() {
           </div>
 
           <div className="hidden gap-5 md:flex">
-            <Button onClick={() => setShowForm((show) => !show)} type="edit">
+            <Button
+              onClick={() => {
+               setShowForm((show=>!show))
+                dispatch({ type: "FORM_SET_EDIT_VALUES" ,payload:invoice[0]});
+              }}
+              type="edit"
+            >
               Edit
             </Button>
             <Button onClick={() => handleDelete(id)} type="delete">
@@ -105,8 +112,7 @@ function InvoiceDetail() {
 
       {showForm && (
         <CreateEditInvoice
-          invoiceToEdit={invoice[0]}
-          setShowForm={setShowForm}
+        setShowForm={setShowForm}    
         />
       )}
       {showForm && <Overlay />}

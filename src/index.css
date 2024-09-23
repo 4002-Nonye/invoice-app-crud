@@ -46,7 +46,7 @@ body.dark {
 }
 
 .list {
-  @apply w-16 overflow-scroll text-left;
+  @apply w-12 overflow-scroll text-left;
 }
 .label {
   @apply text-sm font-semibold text-grey-500 dark:text-grey-200;
@@ -55,6 +55,14 @@ body.dark {
   @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 font-bold caret-lightblue-300 autofillClass focus:border-lightblue-300 focus:outline-none dark:border-darkblue-400 dark:bg-darkblue-400 dark:text-white-100;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 .errorBorder {
   @apply border-red-200 focus:outline-none;
 }
@@ -142,3 +150,31 @@ body.dark {
   );
   mask: radial-gradient(farthest-side, transparent calc(100% - 5px), black 0);
 }
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  @apply mr-1 h-4 w-4 cursor-pointer rounded-sm bg-darkblue-100 outline-none transition-all duration-200;
+}
+input:checked {
+  @apply relative bg-lightblue-300;
+}
+input:checked::before {
+  content: "\2714";
+  font-size: 0.9rem;
+  color: #fff;
+  position: absolute;
+  right: 2px;
+  top: -2px;
+}
+input[type="checkbox"]:not(:checked):hover {
+  @apply border-[.1rem] border-lightblue-300;
+}
+
+.gridClass {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-left: 3rem;
+  align-items: center;
+}
+

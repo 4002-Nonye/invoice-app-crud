@@ -1,8 +1,10 @@
+import { useInvoiceContext } from "../../context/InvoiceContext";
 import Box from "../../ui/Box";
 import Label from "../../ui/Label";
 
 /* eslint-disable react/prop-types */
-function ClientInput({ register, errors }) {
+function ClientInput() {
+  const { register, errors } =useInvoiceContext()
   
   return (
     <>
