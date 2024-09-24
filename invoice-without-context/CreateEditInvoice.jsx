@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { v4 as uuidv4 } from 'uuid';
 
-import { useForm } from '../../context/FormContext';
 import Calendar from '../../ui/Calendar';
 import Cta from '../../ui/Cta';
 import Description from '../../ui/Description';
@@ -14,24 +15,35 @@ import UserInput from '../user/UserInput';
 import { useCreateInvoice } from './useCreateInvoice';
 import { useEditInvoice } from './useEditInvoice';
 
-function CreateEditInvoice({ setShowForm }) {
-    const {
-        editValues,
-        handleSubmit,
-        reset,
-        getValues,
-        startDate,
-        handleShowForm,
-        paymentTerm,
-    } = useForm();
+function CreateEditInvoice({ setShowForm, invoiceToEdit = {} }) {
+    // This is to get the current invoice that is to be edited and populating the form with the existing data
+    const { id: editId, ...editValues } = invoiceToEdit;
+    const [isMissingValue, setIsMissingValue] = useState(false);
 
     //  We use this to check if the form was opened for creating or
     //editing the invoice by determining if there is an ID when the edit button is clicked
-    const { id: editId, invoiceId } = editValues;
     const isEditSession = Boolean(editId);
 
-    const [isMissingValue, setIsMissingValue] = useState(false);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const [itemsArr, setItemsArr] = useState(
+        editValues.itemsArr || [{ name: '', id: uuidv4(), qty: '', price: '' }],
+    );
+    const [startDate, setStartDate] = useState(
+        editValues.startDate || new Date(),
+    );
+    const [paymentTerm, setPaymentTerm] = useState(editValues.paymentTerm || 1);
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const {
+        handleSubmit,
+        register,
+        reset,
+        getValues,
+        formState: { errors },
+        setValue,
+    } = useForm({
+        defaultValues: isEditSession ? editValues : {},
+    });
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const { mutate: createInvoice, isLoading: isCreating } = useCreateInvoice();
@@ -95,7 +107,6 @@ function CreateEditInvoice({ setShowForm }) {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function handleDraft() {
         const currentFormValue = getValues();
-        console.log(currentFormValue);
 
         saveAsDraft(
             {
@@ -125,9 +136,11 @@ function CreateEditInvoice({ setShowForm }) {
     function handleDiscard() {
         reset();
         setShowForm(false);
-        handleShowForm();
     }
 
+    function handlePaymentTerms(term) {
+        setPaymentTerm(term);
+    }
     return (
         <form
             onSubmit={handleSubmit(onSubmit, onError)}
@@ -136,16 +149,28 @@ function CreateEditInvoice({ setShowForm }) {
         >
             <div className="flex h-full flex-col space-y-4 overflow-scroll pb-40">
                 <h3 className="text-3xl font-bold dark:text-white-200">
-                    {isEditSession ? `Edit #${invoiceId} ` : 'New invoice'}
+                    {isEditSession ? `Edit #XM${editId} ` : 'New invoice'}
                 </h3>
-                <UserInput />
-                <ClientInput />
+                <UserInput register={register} errors={errors} />
+                <ClientInput register={register} errors={errors} />
                 <div className="flex w-full flex-col gap-10 pt-5 md:flex-row">
-                    <Calendar />
-                    <PaymentTerms />
+                    <Calendar
+                        startDate={startDate}
+                        setStartDate={setStartDate}
+                    />
+                    <PaymentTerms
+                        paymentTerm={paymentTerm}
+                        handlePaymentTerms={handlePaymentTerms}
+                    />
                 </div>
-                <Description />
-                <ItemList isMissingValue={isMissingValue} />
+                <Description register={register} errors={errors} />
+                <ItemList
+                    register={register}
+                    setValue={setValue}
+                    itemsArr={itemsArr}
+                    setItemsArr={setItemsArr}
+                    isMissingValue={isMissingValue}
+                />
             </div>
 
             <div className="sticky bottom-0 left-0 w-full bg-white-200 p-0 dark:bg-darkblue-500">

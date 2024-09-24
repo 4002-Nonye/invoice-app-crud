@@ -1,25 +1,23 @@
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import toast from "react-hot-toast";
-
-import CreateEditInvoice from "../features/invoice/CreateEditInvoice";
-import InvoiceSummary from "../features/invoice/InvoiceSummary";
-import DeletePrompt from "../ui/DeletePrompt";
-import Overlay from "../ui/Overlay";
-import Button from "../ui/Button";
-import Spinner from "../ui/Spinner";
-import arrowLeft from "../assets/arrow-left.svg";
-
-import { useDeleteInvoice } from "../features/invoice/useDeleteInvoice";
-import { useInvoice } from "../features/invoice/useInvoice";
-import { useEditInvoice } from "../features/invoice/useEditInvoice";
-import { useInvoiceContext } from "../context/InvoiceContext";
+import arrowLeft from '../assets/arrow-left.svg';
+import { useForm } from '../context/FormContext';
+import CreateEditInvoice from '../features/invoice/CreateEditInvoice';
+import InvoiceSummary from '../features/invoice/InvoiceSummary';
+import { useDeleteInvoice } from '../features/invoice/useDeleteInvoice';
+import { useEditInvoice } from '../features/invoice/useEditInvoice';
+import { useInvoice } from '../features/invoice/useInvoice';
+import Button from '../ui/Button';
+import DeletePrompt from '../ui/DeletePrompt';
+import Overlay from '../ui/Overlay';
+import Spinner from '../ui/Spinner';
 
 function InvoiceDetail() {
-  const { dispatch } = useInvoiceContext();
   const navigate = useNavigate();
- const [showForm,setShowForm] = useState(false)
+  const { handleSetEditForm } = useForm();
+  const [showForm, setShowForm] = useState(false);
 
   // use the current ID of invoice clicked to fetch details of an invoice
   const { id } = useParams();
@@ -37,11 +35,11 @@ function InvoiceDetail() {
     markAsPaid(
       {
         ...invoice,
-        status: "paid",
+        status: 'paid',
       },
       {
         onSuccess: () => {
-          toast.success("Invoice marked as paid");
+          toast.success('Invoice marked as paid');
         },
       },
     );
@@ -51,7 +49,7 @@ function InvoiceDetail() {
   const { isDeleting, deleteInvoice } = useDeleteInvoice();
 
   function handleDelete(id) {
-    deleteInvoice(id, { onSuccess: () => navigate("/") });
+    deleteInvoice(id, { onSuccess: () => navigate('/') });
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   if (isLoading) return <Spinner />;
@@ -65,7 +63,7 @@ function InvoiceDetail() {
         >
           <img src={arrowLeft} alt="back icon" />
           <span className="font-bold transition duration-500 ease-linear hover:text-grey-200 dark:text-white-200">
-            {" "}
+            {' '}
             Go back
           </span>
         </Button>
@@ -74,7 +72,7 @@ function InvoiceDetail() {
           <div className="inline-flex w-full items-center justify-between gap-7 md:w-[unset]">
             <p className="font-semibold capitalize text-grey-500">status</p>
             <p
-              className={`status ${invoice[0].status === "pending" ? "pending-status" : invoice[0].status === "draft" ? `draft-status` : "paid-status"}`}
+              className={`status ${invoice[0].status === 'pending' ? 'pending-status' : invoice[0].status === 'draft' ? `draft-status` : 'paid-status'}`}
             >
               {invoice[0].status}
             </p>
@@ -83,8 +81,8 @@ function InvoiceDetail() {
           <div className="hidden gap-5 md:flex">
             <Button
               onClick={() => {
-               setShowForm((show=>!show))
-                dispatch({ type: "FORM_SET_EDIT_VALUES" ,payload:invoice[0]});
+                setShowForm((show) => !show);
+                handleSetEditForm(invoice[0]);
               }}
               type="edit"
             >
@@ -93,8 +91,8 @@ function InvoiceDetail() {
             <Button onClick={() => handleDelete(id)} type="delete">
               Delete
             </Button>
-            {invoice[0]?.status !== "draft" &&
-              invoice[0]?.status !== "paid" && (
+            {invoice[0]?.status !== 'draft' &&
+              invoice[0]?.status !== 'paid' && (
                 <Button
                   type="paid"
                   onClick={() => handleStatusUpdate(invoice[0])}
@@ -110,11 +108,7 @@ function InvoiceDetail() {
         {/* <DeletePrompt /> */}
       </div>
 
-      {showForm && (
-        <CreateEditInvoice
-        setShowForm={setShowForm}    
-        />
-      )}
+      {showForm && <CreateEditInvoice setShowForm={setShowForm} />}
       {showForm && <Overlay />}
     </>
   );

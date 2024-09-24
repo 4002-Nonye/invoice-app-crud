@@ -1,115 +1,115 @@
-@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "League Spartan", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'League Spartan', sans-serif;
 }
 
 body {
-  position: relative;
-  background-color: #f8f8fb;
-  scroll-behavior: smooth;
+    position: relative;
+    background-color: #f8f8fb;
+    scroll-behavior: smooth;
 }
 body.dark {
-  @apply bg-darkblue-500;
+    @apply bg-darkblue-500;
 }
 
 .status {
-  @apply w-32 rounded-md px-5 py-2 text-center font-bold capitalize before:mr-1 before:mt-[-0.2rem] before:inline-block before:h-[0.4rem] before:w-[0.4rem] before:rounded-lg before:font-extrabold before:content-[''];
+    @apply w-32 rounded-md px-5 py-2 text-center font-bold capitalize before:mr-1 before:mt-[-0.2rem] before:inline-block before:h-[0.4rem] before:w-[0.4rem] before:rounded-lg before:font-extrabold before:content-[''];
 }
 .pending-status {
-  @apply bg-orange bg-opacity-10 text-orange before:bg-orange;
+    @apply bg-orange bg-opacity-10 text-orange before:bg-orange;
 }
 .draft-status {
-  @apply bg-darkblue-600 bg-opacity-10 text-darkblue-600 before:bg-darkblue-600 dark:bg-darkblue-200 dark:text-white-200 dark:before:bg-white-200;
+    @apply bg-darkblue-600 bg-opacity-10 text-darkblue-600 before:bg-darkblue-600 dark:bg-darkblue-200 dark:text-white-200 dark:before:bg-white-200;
 }
 .paid-status {
-  @apply bg-green bg-opacity-10 text-green before:bg-green;
+    @apply bg-green bg-opacity-10 text-green before:bg-green;
 }
 ::-webkit-scrollbar {
-  @apply hidden;
+    @apply hidden;
 }
 .gridDisplay {
-  @apply grid justify-between;
-  grid-template-columns: repeat(3, 11rem);
-  gap: 5px;
+    @apply grid justify-between;
+    grid-template-columns: repeat(3, 11rem);
+    gap: 5px;
 }
 
 .errorDiv {
-  @apply inline-flex items-center justify-between pt-6 text-sm;
+    @apply inline-flex items-center justify-between pt-6 text-sm;
 }
 
 .list {
-  @apply w-12 overflow-scroll text-left;
+    @apply w-12 overflow-scroll text-left;
 }
 .label {
-  @apply text-sm font-semibold text-grey-500 dark:text-grey-200;
+    @apply text-sm font-semibold text-grey-500 dark:text-grey-200;
 }
 .input {
-  @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 font-bold caret-lightblue-300 autofillClass focus:border-lightblue-300 focus:outline-none dark:border-darkblue-400 dark:bg-darkblue-400 dark:text-white-100;
+    @apply rounded-sm border-2 border-darkblue-100 bg-darkblue-100 bg-opacity-35 p-3 font-bold caret-lightblue-300 autofillClass focus:border-lightblue-300 focus:outline-none dark:border-darkblue-400 dark:bg-darkblue-400 dark:text-white-100;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
-input[type="number"] {
-  -moz-appearance: textfield;
+input[type='number'] {
+    -moz-appearance: textfield;
 }
 .errorBorder {
-  @apply border-red-200 focus:outline-none;
+    @apply border-red-200 focus:outline-none;
 }
 .errorText {
-  @apply text-red-200;
+    @apply text-red-200;
 }
 .react-datepicker__input-container input {
-  @apply w-full cursor-pointer border-none bg-darkblue-100 bg-opacity-5 outline-none focus:outline-none dark:bg-darkblue-400;
+    @apply w-full cursor-pointer border-none bg-darkblue-100 bg-opacity-5 outline-none focus:outline-none dark:bg-darkblue-400;
 }
 .react-datepicker-popper {
-  @apply bg-white-100 dark:bg-darkblue-300;
+    @apply bg-white-100 dark:bg-darkblue-300;
 }
 .react-datepicker-popper[style] {
-  /* transform: translate(140.5px, 450px) !important; */
+    /* transform: translate(140.5px, 450px) !important; */
 }
 .react-datepicker__header {
-  @apply border-b-0 bg-white-100 p-4 pt-6 dark:bg-darkblue-300;
+    @apply border-b-0 bg-white-100 p-4 pt-6 dark:bg-darkblue-300;
 }
 .react-datepicker__navigation-icon::before {
-  @apply border-lightblue-300;
+    @apply border-lightblue-300;
 }
 .react-datepicker.wrapper {
-  @apply w-full border-0 shadow-3xl outline-none dark:bg-darkblue-300 dark:shadow-none;
+    @apply w-full border-0 shadow-3xl outline-none dark:bg-darkblue-300 dark:shadow-none;
 }
 .react-datepicker__month-container {
-  @apply float-none;
+    @apply float-none;
 }
 .react-datepicker__day,
 .react-datepicker__current-month {
-  @apply dark:text-white-100;
+    @apply dark:text-white-100;
 }
 .react-datepicker__day--keyboard-selected {
-  @apply bg-lightblue-100 dark:bg-darkblue-400;
+    @apply bg-lightblue-100 dark:bg-darkblue-400;
 }
 .react-datepicker__navigation {
-  @apply p-4 pt-6;
+    @apply p-4 pt-6;
 }
 .react-datepicker__day-name,
-.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle,
-.react-datepicker-popper[data-placement^="bottom"]
-  .react-datepicker__triangle::after,
-.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle {
-  @apply hidden;
+.react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle,
+.react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::after,
+.react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle {
+    @apply hidden;
 }
 
 .react-datepicker__day--selected {
-  @apply bg-transparent text-lightblue-300;
+    @apply bg-transparent text-lightblue-300;
 }
 .react-datepicker__day--selected:hover,
 .react-datepicker__day--in-selecting-range:hover,
@@ -124,57 +124,56 @@ input[type="number"] {
 .react-datepicker__year-text--in-selecting-range:hover,
 .react-datepicker__year-text--in-range:hover,
 .react-datepicker__day:hover {
-  @apply bg-transparent;
+    @apply bg-transparent;
 }
 .react-datepicker__day--outside-month {
-  @apply text-grey-300;
+    @apply text-grey-300;
 }
 
 /* LOADER ANIMATION */
 @keyframes rotate {
-  to {
-    transform: rotate(1turn);
-  }
+    to {
+        transform: rotate(1turn);
+    }
 }
 .spinner {
-  @apply mx-auto aspect-square animate-spin rounded-full;
+    @apply mx-auto aspect-square animate-spin rounded-full;
 
-  background:
-    radial-gradient(farthest-side, #373b53 94%, transparent) top/10px 10px
-      no-repeat,
-    conic-gradient(transparent 30%, #373b53);
-  -webkit-mask: radial-gradient(
-    farthest-side,
-    transparent calc(100% - 10px),
-    black 0
-  );
-  mask: radial-gradient(farthest-side, transparent calc(100% - 5px), black 0);
+    background:
+        radial-gradient(farthest-side, #373b53 94%, transparent) top/10px 10px
+            no-repeat,
+        conic-gradient(transparent 30%, #373b53);
+    -webkit-mask: radial-gradient(
+        farthest-side,
+        transparent calc(100% - 10px),
+        black 0
+    );
+    mask: radial-gradient(farthest-side, transparent calc(100% - 5px), black 0);
 }
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  @apply mr-1 h-4 w-4 cursor-pointer rounded-sm bg-darkblue-100 outline-none transition-all duration-200;
+input[type='checkbox'] {
+    -webkit-appearance: none;
+    appearance: none;
+    @apply mr-1 h-4 w-4 cursor-pointer rounded-sm bg-darkblue-100 outline-none transition-all duration-200;
 }
 input:checked {
-  @apply relative bg-lightblue-300;
+    @apply relative bg-lightblue-300;
 }
 input:checked::before {
-  content: "\2714";
-  font-size: 0.9rem;
-  color: #fff;
-  position: absolute;
-  right: 2px;
-  top: -2px;
+    content: '\2714';
+    font-size: 0.9rem;
+    color: #fff;
+    position: absolute;
+    right: 2px;
+    top: -2px;
 }
-input[type="checkbox"]:not(:checked):hover {
-  @apply border-[.1rem] border-lightblue-300;
+input[type='checkbox']:not(:checked):hover {
+    @apply border-[.1rem] border-lightblue-300;
 }
 
 .gridClass {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 2rem;
-  margin-left: 3rem;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-left: 3rem;
+    align-items: center;
 }
-

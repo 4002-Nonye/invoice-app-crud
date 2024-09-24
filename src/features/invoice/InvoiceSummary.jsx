@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { addDaysToDate, generateId } from "../../utils/helpers";
-import MobileInvoiceSummary from "./MobileInvoiceSummary";
+import { addDaysToDate, generateId } from '../../utils/helpers';
+import MobileInvoiceSummary from './MobileInvoiceSummary';
 
 function InvoiceSummary({ invoice }) {
   const {
@@ -22,7 +22,11 @@ function InvoiceSummary({ invoice }) {
   } = invoice[0];
 
   const newItemsArr =
-    typeof itemsArr === "string" ? JSON.parse(itemsArr) : itemsArr;
+    typeof itemsArr === 'string' ? JSON.parse(itemsArr) : itemsArr;
+  const itemsTotal = newItemsArr.reduce(
+    (prev, acc) => prev + acc.qty * acc.price,
+    0,
+  );
 
   const noData = <span className="text-gray-400">Not provided</span>;
   generateId();
@@ -89,22 +93,22 @@ function InvoiceSummary({ invoice }) {
             Sent to
           </h3>
           <p className="font-bold text-darkblue-600 dark:text-white-100">
-            {clientEmail || <span className="text-gray-400">Not provided</span>}
+            {clientEmail || noData}
           </p>
         </div>
       </div>
 
-      <div className="mt-11 rounded-md bg-white-200 pt-8 font-medium text-grey-500 dark:bg-darkblue-300 ">
+      <div className="mt-11 rounded-md bg-white-200 pt-8 font-medium text-grey-500 dark:bg-darkblue-300">
         <div className="gridClass pb-5 capitalize dark:text-white-200">
           <p>item name</p>
-          <p className=" uppercase">qty.</p>
+          <p className="uppercase">qty.</p>
           <p>price</p>
           <p className="text-left">total</p>
         </div>
 
         {/* h-28 overflow-scroll */}
         <div className="text-md hidden md:block">
-          {" "}
+          {' '}
           <div className="pt-4">
             <div className="pb-4">
               {newItemsArr.map((item) => {
@@ -116,10 +120,12 @@ function InvoiceSummary({ invoice }) {
                       )}
                     </p>
 
-                    <p  >{item.qty||'-'}</p>
-                    <p >${item.price ||'-'}</p>
+                    <p>{item.qty || '-'}</p>
+                    <p>{item.price ? `$${item.price}` : '-'}</p>
                     <p className="list text-lg font-bold text-darkblue-600 dark:text-white-200">
-                      ${item.qty * item.price}
+                      {item.qty <= 0 || item.price < 0
+                        ? '-'
+                        : `$${item.qty * item.price}`}
                     </p>
                   </div>
                 );
@@ -130,9 +136,7 @@ function InvoiceSummary({ invoice }) {
         <MobileInvoiceSummary />
         <div className="mt-6 flex justify-between rounded-md bg-darkblue-500 p-8 text-lg font-bold text-white-300">
           <p>Amount Due</p>
-          <p className="text-2xl">
-            ${newItemsArr.reduce((prev, acc) => prev + acc.qty * acc.price, 0)}
-          </p>
+          <p className="text-2xl">${itemsTotal}</p>
         </div>
       </div>
     </div>
