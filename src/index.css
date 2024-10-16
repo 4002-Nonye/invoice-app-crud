@@ -75,9 +75,7 @@ input[type='number'] {
 .react-datepicker-popper {
     @apply bg-white-100 dark:bg-darkblue-300;
 }
-.react-datepicker-popper[style] {
-    /* transform: translate(140.5px, 450px) !important; */
-}
+
 .react-datepicker__header {
     @apply border-b-0 bg-white-100 p-4 pt-6 dark:bg-darkblue-300;
 }

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 import { useState } from 'react';
 
 import arrowDown from '../../assets/arrow-down.svg';
@@ -50,5 +51,6 @@ function FilterInvoice({ setStatus, status }) {
     </div>
   );
 }
+
 
 export default FilterInvoice;
